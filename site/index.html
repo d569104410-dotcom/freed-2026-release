@@ -1,0 +1,1041 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>معاينة نظام فريد 2026 — أوفلاين</title>
+  <style>
+:root{
+  --bg:#0b1220; --panel:#111b2e; --panel2:#0f172a; --muted:#9aa4b2; --text:#e6edf7;
+  --primary:#4f46e5; --primary2:#6366f1; --ok:#10b981; --warn:#f59e0b; --bad:#ef4444;
+  --border:#21304f; --chip:#16233d;
+  --shadow: 0 10px 30px rgba(0,0,0,.25);
+  --radius:14px;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --sans: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans Arabic", "Noto Kufi Arabic", sans-serif;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; background:linear-gradient(180deg, #070b14, #0b1220 40%, #070b14);
+  color:var(--text); font-family:var(--sans); direction:rtl;
+}
+a{color:inherit; text-decoration:none}
+.container{max-width:1280px; margin:0 auto; padding:18px}
+.topbar{
+  position:sticky; top:0; z-index:10;
+  backdrop-filter: blur(10px);
+  background: rgba(7, 11, 20, .75);
+  border-bottom:1px solid rgba(33,48,79,.65);
+}
+.brand{
+  display:flex; align-items:center; gap:12px; justify-content:space-between;
+  padding:14px 18px;
+}
+.brand .left{display:flex; align-items:center; gap:12px}
+.logo{
+  width:40px; height:40px; border-radius:12px;
+  background: radial-gradient(circle at 30% 30%, var(--primary2), var(--primary));
+  display:grid; place-items:center; box-shadow:var(--shadow);
+  font-weight:800;
+}
+.titleblock .name{font-weight:800; letter-spacing:.2px}
+.titleblock .sub{color:var(--muted); font-size:12px; margin-top:2px}
+.searchbox{
+  display:flex; align-items:center; gap:10px;
+  background: rgba(17,27,46,.75);
+  border:1px solid rgba(33,48,79,.9);
+  padding:10px 12px; border-radius:12px;
+  min-width:320px;
+}
+.searchbox input{
+  width:100%; border:0; outline:0; background:transparent; color:var(--text);
+}
+.layout{display:grid; grid-template-columns: 270px 1fr; gap:16px; margin-top:16px}
+.sidebar{
+  background: rgba(17,27,46,.65);
+  border:1px solid rgba(33,48,79,.85);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+}
+.nav{padding:10px}
+.nav h4{margin:12px 10px 8px; color:var(--muted); font-size:12px; font-weight:700}
+.nav a{
+  display:flex; align-items:center; gap:10px;
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid transparent;
+  color:var(--text);
+}
+.nav a:hover{background:rgba(79,70,229,.10); border-color:rgba(79,70,229,.25)}
+.nav a.active{background:rgba(79,70,229,.18); border-color:rgba(79,70,229,.35)}
+.nav .icon{width:22px; text-align:center; opacity:.95}
+.main{
+  background: rgba(17,27,46,.40);
+  border:1px solid rgba(33,48,79,.65);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+}
+.content{padding:16px}
+.grid{display:grid; gap:12px}
+.grid.cols-3{grid-template-columns: repeat(3, minmax(0,1fr))}
+.grid.cols-2{grid-template-columns: repeat(2, minmax(0,1fr))}
+.card{
+  background: rgba(15,23,42,.75);
+  border:1px solid rgba(33,48,79,.75);
+  border-radius: var(--radius);
+  padding:14px;
+}
+.card h3{margin:0 0 10px; font-size:14px}
+.kpi{display:flex; align-items:flex-end; justify-content:space-between}
+.kpi .val{font-size:26px; font-weight:900}
+.kpi .lbl{color:var(--muted); font-size:12px}
+.badge{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:6px 10px; border-radius:999px;
+  background: rgba(22,35,61,.9); border:1px solid rgba(33,48,79,.9);
+  color:var(--muted); font-size:12px; font-weight:650;
+}
+.badge.ok{color:#b6f7d8; border-color:rgba(16,185,129,.35); background:rgba(16,185,129,.12)}
+.badge.warn{color:#ffe6b8; border-color:rgba(245,158,11,.35); background:rgba(245,158,11,.12)}
+.badge.bad{color:#ffb9b9; border-color:rgba(239,68,68,.35); background:rgba(239,68,68,.12)}
+.table{
+  width:100%; border-collapse:collapse; overflow:hidden; border-radius:12px;
+  border:1px solid rgba(33,48,79,.75);
+}
+.table th,.table td{padding:10px 10px; text-align:right; font-size:13px; border-bottom:1px solid rgba(33,48,79,.55)}
+.table th{color:var(--muted); font-weight:750; background: rgba(15,23,42,.85)}
+.table tr:hover td{background:rgba(79,70,229,.06)}
+.btns{display:flex; gap:8px; flex-wrap:wrap}
+.btn{
+  border:1px solid rgba(79,70,229,.35);
+  background:rgba(79,70,229,.18);
+  color:var(--text);
+  padding:8px 10px; border-radius:12px;
+  font-weight:750; cursor:pointer;
+}
+.btn:hover{background:rgba(79,70,229,.28)}
+.btn.ghost{background:transparent; border-color:rgba(33,48,79,.85)}
+.btn.ghost:hover{background:rgba(33,48,79,.25)}
+.hr{height:1px; background:rgba(33,48,79,.65); margin:12px 0}
+.small{font-size:12px; color:var(--muted)}
+.row{display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between}
+.chips{display:flex; gap:8px; flex-wrap:wrap}
+.chip{background:rgba(22,35,61,.85); border:1px solid rgba(33,48,79,.75); padding:6px 10px; border-radius:999px; font-size:12px; color:var(--muted)}
+.modal-backdrop{
+  position:fixed; inset:0; background:rgba(0,0,0,.55);
+  display:none; align-items:center; justify-content:center; z-index:50;
+}
+.modal{
+  width:min(1100px, 92vw); max-height:86vh; overflow:auto;
+  background: rgba(15,23,42,.96);
+  border:1px solid rgba(33,48,79,.85);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+.modal header{
+  position:sticky; top:0; z-index:1;
+  background: rgba(15,23,42,.98);
+  border-bottom:1px solid rgba(33,48,79,.7);
+  padding:14px 16px;
+  display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+}
+.tabs{display:flex; gap:8px; flex-wrap:wrap}
+.tab{
+  padding:8px 10px; border-radius:12px; cursor:pointer;
+  border:1px solid rgba(33,48,79,.75);
+  background:rgba(22,35,61,.45);
+  color:var(--muted); font-weight:750; font-size:12px;
+}
+.tab.active{background:rgba(79,70,229,.22); border-color:rgba(79,70,229,.4); color:var(--text)}
+.modal .body{padding:14px 16px}
+pre.code{
+  font-family:var(--mono); font-size:12px; line-height:1.5;
+  background: rgba(7,11,20,.75);
+  border:1px solid rgba(33,48,79,.7);
+  padding:12px; border-radius:12px; overflow:auto;
+}
+.footer-note{
+  padding:10px 12px; color:var(--muted); font-size:12px; border-top:1px solid rgba(33,48,79,.7);
+}
+@media (max-width: 980px){
+  .layout{grid-template-columns: 1fr}
+  .searchbox{min-width:unset; width:100%}
+}
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">
+      <div class="left">
+        <div class="logo">ف</div>
+        <div class="titleblock">
+          <div class="name" id="sysName">نظام فريد 2026 (معاينة أوفلاين)</div>
+          <div class="sub" id="sysOrg">—</div>
+        </div>
+      </div>
+      <div class="searchbox" title="بحث سريع داخل المبادرات">
+        <span style="opacity:.75">🔎</span>
+        <input id="q" placeholder="ابحث: مبادرة، إدارة، هدف تشغيلي..." />
+        <span class="badge" id="offlineBadge">OFFLINE</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="layout">
+      <aside class="sidebar">
+        <nav class="nav" id="nav">
+          <h4>القائمة</h4>
+          <a href="#/overview" data-route="overview" class="active"><span class="icon">🏠</span>لوحة التحكم</a>
+          <a href="#/strategy" data-route="strategy"><span class="icon">🎯</span>الخطة الاستراتيجية</a>
+          <a href="#/initiatives" data-route="initiatives"><span class="icon">📌</span>المبادرات</a>
+          <a href="#/timeline" data-route="timeline"><span class="icon">🗓️</span>الجدول الزمني</a>
+          <a href="#/inventory" data-route="inventory"><span class="icon">📦</span>المخزون</a>
+          <a href="#/donors" data-route="donors"><span class="icon">🤝</span>الجهات المانحة</a>
+          <a href="#/deductions" data-route="deductions"><span class="icon">💳</span>المستقطعين</a>
+          <a href="#/trainees" data-route="trainees"><span class="icon">🎓</span>المتدربون</a>
+          <a href="#/expenses" data-route="expenses"><span class="icon">🧾</span>المصروفات التشغيلية</a>
+          <a href="#/activity" data-route="activity"><span class="icon">📜</span>سجل النشاط</a>
+          <a href="#/rbac" data-route="rbac"><span class="icon">🔐</span>الصلاحيات</a>
+          <a href="#/settings" data-route="settings"><span class="icon">⚙️</span>الإعدادات</a>
+          <div class="hr"></div>
+          <div class="small" style="padding:0 10px 10px">
+            هذه معاينة أوفلاين (Static Prototype) لواجهات النظام. لا تتطلب أي سيرفر.
+          </div>
+        </nav>
+      </aside>
+
+      <main class="main">
+        <div class="content" id="view"></div>
+      </main>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true">
+    <div class="modal" aria-label="Initiative 360">
+      <header>
+        <div>
+          <div style="font-weight:900; font-size:16px" id="mTitle">—</div>
+          <div class="small" id="mSub">—</div>
+          <div class="chips" style="margin-top:10px" id="mChips"></div>
+        </div>
+        <div class="btns">
+          <button class="btn ghost" id="mClose">إغلاق ✕</button>
+        </div>
+      </header>
+      <div class="body">
+        <div class="tabs" id="mTabs"></div>
+        <div class="hr"></div>
+        <div id="mBody"></div>
+      </div>
+      <div class="footer-note" id="mFoot">—</div>
+    </div>
+  </div>
+
+<script>
+const SSOT = {"system_info":{"name":"فريد 2026","name_en":"Freed System 2026","organization":"جمعية بر مشارق","organization_en":"Bir Mashariq Charity","license":"1273","fiscal_year":{"year":2026,"start_date":"2026-01-01","end_date":"2026-12-31","status":"active"},"version":"5.2.0","last_updated":"2026-02-07T23:00:00Z","last_event_id":2,"change_log":[{"version":"5.1.0","date":"2026-02-07","changes":["سجل مخاطر مؤسسي (18 خطر)","معالم ومؤشرات ومخاطر لكل مبادرة","تصحيح KPIs وتوسيعها إلى 13 مؤشر","ربط KPIs بالأهداف الاستراتيجية والتشغيلية"]},{"version":"5.2.0","date":"2026-02-07","changes":["تصحيح 6 ميزانيات صفرية","معالجة عدم تطابق الإدارة/الموظف","إنشاء 8 مبادرات جديدة (I53-I60) للأهداف التشغيلية الفارغة","سياسة إظهار المبادرات (system_admin_only) للمبادرات الداخلية","ربط 10 جهات مانحة بـ 13 تعهد و 8 معاملات","تحديث جميع الفهارس والسياسات والصلاحيات"]}]},"identity":{"vision":"مجتمع متمكن ومستدام خالٍ من الفقر والحاجة","mission":"تقديم برامج نوعية مبتكرة لتمكين المستفيدين وتحقيق الاستدامة من خلال شراكات فاعلة وحوكمة رشيدة","values":[{"id":"V1","name":"الأمانة","icon":"🤲"},{"id":"V2","name":"التميز","icon":"⭐"},{"id":"V3","name":"الاستدامة","icon":"🌱"},{"id":"V4","name":"الشراكة","icon":"🤝"},{"id":"V5","name":"الابتكار","icon":"💡"}]},"lookups":{"perspectives":[{"id":"P1","code":"P1","name":"المالي والاستدامة","icon":"💰","order":1},{"id":"P2","code":"P2","name":"المستفيدون وأصحاب المصلحة","icon":"👥","order":2},{"id":"P3","code":"P3","name":"العمليات الداخلية","icon":"⚙️","order":3},{"id":"P4","code":"P4","name":"التعلم والنمو","icon":"📚","order":4}],"strategic_objectives":[{"id":"SO1","code":"SO1","name":"الاستدامة المالية وتنمية الموارد","perspective_id":"P1"},{"id":"SO2","code":"SO2","name":"تعظيم العائد من الاستثمار والأوقاف","perspective_id":"P1"},{"id":"SO3","code":"SO3","name":"الحوكمة المالية والامتثال","perspective_id":"P1"},{"id":"SO4","code":"SO4","name":"التحول الرقمي وكفاءة العمليات","perspective_id":"P3"},{"id":"SO5","code":"SO5","name":"تحقيق أثر اجتماعي عالي الجودة","perspective_id":"P2"},{"id":"SO6","code":"SO6","name":"تطوير البحث الاجتماعي وقياس الأثر","perspective_id":"P2"},{"id":"SO7","code":"SO7","name":"علاقات وإعلام وشراكات احترافية","perspective_id":"P4"},{"id":"SO8","code":"SO8","name":"بناء القدرات والتطوع","perspective_id":"P4"}],"operational_objectives":[{"id":"OP1.1","code":"OP1.1","name":"تنويع مصادر الدخل وزيادة عدد المستقطعين خلال السنة","so_id":"SO1"},{"id":"OP1.2","code":"OP1.2","name":"رفع كفاءة الحملات الإعلامية الداعمة للتبرعات","so_id":"SO1"},{"id":"OP1.3","code":"OP1.3","name":"تحسين تجربة المتبرع ورفع معدل الاستمرار","so_id":"SO1"},{"id":"OP2.1","code":"OP2.1","name":"تحسين أداء محفظة الاستثمارات والأوقاف وفق سياسة معتمدة","so_id":"SO2"},{"id":"OP2.2","code":"OP2.2","name":"زيادة مساهمة الريع في تمويل المبادرات السنوية","so_id":"SO2"},{"id":"OP3.1","code":"OP3.1","name":"الالتزام بالسياسات المالية وتوحيد الإجراءات","so_id":"SO3"},{"id":"OP3.2","code":"OP3.2","name":"تعزيز الرقابة الداخلية وسجل التدقيق","so_id":"SO3"},{"id":"OP3.3","code":"OP3.3","name":"رفع جاهزية التقارير المالية للاعتماد","so_id":"SO3"},{"id":"OP4.1","code":"OP4.1","name":"أتمتة عمليات المتابعة والتقارير","so_id":"SO4"},{"id":"OP4.2","code":"OP4.2","name":"تقليل زمن الإجراءات التشغيلية","so_id":"SO4"},{"id":"OP4.3","code":"OP4.3","name":"رفع كفاءة تكامل الأنظمة والبيانات","so_id":"SO4"},{"id":"OP5.1","code":"OP5.1","name":"تحسين جودة تنفيذ المبادرات الاجتماعية","so_id":"SO5"},{"id":"OP5.2","code":"OP5.2","name":"رفع مستوى رضا المستفيدين","so_id":"SO5"},{"id":"OP5.3","code":"OP5.3","name":"زيادة نسبة المبادرات ذات Outcome مثبت","so_id":"SO5"},{"id":"OP6.1","code":"OP6.1","name":"تطوير أدوات البحث الاجتماعي وجمع البيانات","so_id":"SO6"},{"id":"OP6.2","code":"OP6.2","name":"تطبيق منهجيات قياس أثر معتمدة","so_id":"SO6"},{"id":"OP6.3","code":"OP6.3","name":"تحسين دقة التقارير التحليلية للأثر","so_id":"SO6"},{"id":"OP7.1","code":"OP7.1","name":"بناء شراكات مانحة وإعلامية فعالة","so_id":"SO7"},{"id":"OP7.2","code":"OP7.2","name":"تحسين الصورة الذهنية والتغطية الإعلامية","so_id":"SO7"},{"id":"OP7.3","code":"OP7.3","name":"توسيع شبكة العلاقات المؤثرة","so_id":"SO7"},{"id":"OP8.1","code":"OP8.1","name":"استقطاب وتفعيل المتطوعين","so_id":"SO8"},{"id":"OP8.2","code":"OP8.2","name":"تنفيذ برامج تدريب وبناء قدرات للموظفين والمتطوعين","so_id":"SO8"},{"id":"OP8.3","code":"OP8.3","name":"رفع الاستقرار والكفاءة التشغيلية للفرق","so_id":"SO8"}],"departments":[{"id":"D1","code":"D1","name":"الإدارة التنفيذية","icon":"👨‍💼"},{"id":"D2","code":"D2","name":"الإدارة المالية","icon":"💰"},{"id":"D3","code":"D3","name":"إدارة الاستثمار","icon":"📈"},{"id":"D4","code":"D4","name":"إدارة تنمية الموارد المالية","icon":"💎"},{"id":"D5","code":"D5","name":"إدارة العلاقات العامة والإعلام","icon":"📢"},{"id":"D6","code":"D6","name":"إدارة المشاريع","icon":"📊"},{"id":"D7","code":"D7","name":"إدارة البحث الاجتماعي","icon":"🔍"},{"id":"D8","code":"D8","name":"إدارة التطوع","icon":"🤝"}],"initiative_categories":[{"id":"CAT1","code":"social_support","name":"الدعم الاجتماعي والخدمات المباشرة"},{"id":"CAT2","code":"sponsorships","name":"الكفالات"},{"id":"CAT3","code":"seasonal","name":"الموسمية"},{"id":"CAT4","code":"education","name":"التعليم"},{"id":"CAT5","code":"pilgrims","name":"الحجاج والمعتمرين"},{"id":"CAT6","code":"digital_transformation","name":"التحول الرقمي والحوكمة"},{"id":"CAT7","code":"media_relations","name":"الإعلام والعلاقات"},{"id":"CAT8","code":"volunteering","name":"التطوع"},{"id":"CAT9","code":"social_research","name":"البحث الاجتماعي وقياس الأثر"},{"id":"CAT10","code":"resource_development","name":"تنمية الموارد المالية"},{"id":"CAT11","code":"financial_operations","name":"مالية وتشغيلية"},{"id":"CAT12","code":"investment","name":"استثمارية"}],"measurement_units":[{"id":"U1","code":"family","name":"أسرة","icon":"👨‍👩‍👧‍👦"},{"id":"U2","code":"individual","name":"فرد","icon":"👤"},{"id":"U3","code":"orphan","name":"يتيم","icon":"👶"},{"id":"U4","code":"elderly","name":"كبير سن","icon":"👴"},{"id":"U5","code":"device","name":"جهاز","icon":"🔌"},{"id":"U6","code":"basket","name":"سلة","icon":"🧺"},{"id":"U7","code":"meal","name":"وجبة","icon":"🍽️"},{"id":"U8","code":"bag","name":"حقيبة","icon":"🎒"},{"id":"U9","code":"service","name":"خدمة","icon":"⚙️"},{"id":"U10","code":"transaction","name":"معاملة","icon":"📄"},{"id":"U11","code":"percentage","name":"نسبة مئوية","icon":"%"},{"id":"U12","code":"amount","name":"مبلغ مالي","icon":"💰"}],"funding_types":[{"id":"FT1","code":"restricted","name":"مقيد لمبادرة"},{"id":"FT2","code":"unrestricted","name":"أموال عامة"},{"id":"FT3","code":"investment","name":"استثماري"},{"id":"FT4","code":"waqf","name":"وقف"}],"payment_methods":[{"id":"PM1","code":"cash","name":"نقدي","icon":"💵"},{"id":"PM2","code":"check","name":"شيك","icon":"📝"},{"id":"PM3","code":"transfer","name":"تحويل بنكي","icon":"🏦"},{"id":"PM4","code":"card","name":"بطاقة","icon":"💳"},{"id":"PM5","code":"inventory","name":"صرف من المخزون","icon":"📦"},{"id":"PM6","code":"other","name":"أخرى","icon":"📋"}]},"policies":{"revenue_policy":{"investment_return_split":{"reinvestment_percentage":50,"initiatives_percentage":50,"decision_authority":"مجلس الإدارة","last_updated":"2026-01-01"}},"data_governance":{"ssot_single_source":true,"append_only_events":true,"default_status":"pending_confirmation"},"initiative_visibility":{"description":"سياسة إظهار المبادرات في واجهات النظام","rules":[{"visibility":"public","description":"تظهر لجميع المستخدمين وفق صلاحياتهم العادية","applies_to":"المبادرات الأساسية (I01-I52)"},{"visibility":"system_admin_only","description":"تظهر فقط لمدير النظام (role: system_admin) في لوحة التحكم","applies_to":"المبادرات الداخلية والحوكمة (I53-I60)","rationale":"مبادرات مؤسسية داخلية لا يحتاج الموظفون العاديون لرؤيتها","filter_rule":"WHERE initiative.visibility != 'system_admin_only' OR user.role == 'system_admin'"}]}},"rbac":{"roles":{"system_admin":{"name":"مدير النظام","permissions":["full_access","manage_settings","manage_users","approve_decisions","year_close","self_test","view_sensitive_data","edit_all_initiatives","add_revenues","add_expenses","manage_inventory","manage_deductions","send_whatsapp"],"scope":"all"},"general_manager":{"name":"المدير العام","permissions":["view_all_dashboards","approve_decisions","view_reports","create_tasks"],"scope":"all_readonly"},"data_entry":{"name":"موظف إدخال","permissions":["edit_initiatives","add_revenues","add_expenses","add_tasks","manage_checklists","manage_beneficiaries"],"scope":"limited"},"deduction_officer":{"name":"موظف الاستقطاع","permissions":["manage_deductions","send_whatsapp","view_deduction_analytics"],"scope":"deductions_only"}},"page_access":{"overview":["system_admin","general_manager","data_entry","deduction_officer"],"initiatives":["system_admin","general_manager","data_entry"],"finance":["system_admin","general_manager","data_entry"],"deductions":["system_admin","deduction_officer"],"donors":["system_admin","general_manager","data_entry"],"executive_office":["system_admin","data_entry","general_manager"],"timeline":["system_admin","general_manager","data_entry"],"reports":["system_admin","general_manager","data_entry"],"activity":["system_admin","general_manager","data_entry","deduction_officer"],"data_management":["system_admin"],"volunteers":["system_admin","data_entry","general_manager"]}},"ui_config":{"language_policy":{"arabic_default":true,"english_tokens":["SR","%","KPI","SWOT","BSC"]},"currency":{"default":"SR","show_symbol":true,"symbol_position":"after_number","available":[{"code":"SR","name":"Saudi Riyal","symbol":"SR"},{"code":"SAR","name":"Saudi Riyal","symbol":"SAR"},{"code":"USD","name":"US Dollar","symbol":"USD"}]},"tabs":[{"id":"overview","name":"لوحة التحكم","enabled":true,"roles":["system_admin","general_manager","data_entry","deduction_officer"]},{"id":"initiatives","name":"المبادرات","enabled":true,"roles":["system_admin","general_manager","data_entry"]},{"id":"finance","name":"المالية","enabled":true,"roles":["system_admin","general_manager","data_entry"]},{"id":"donors","name":"الجهات المانحة","enabled":true,"roles":["system_admin","general_manager","data_entry"],"group":"finance"},{"id":"deductions","name":"المستقطعين","enabled":true,"roles":["system_admin","deduction_officer"]},{"id":"executive_office","name":"المكتب التنفيذي","enabled":true,"roles":["system_admin","data_entry","general_manager"]},{"id":"timeline","name":"الجدول الزمني","enabled":true,"roles":["system_admin","general_manager","data_entry"]},{"id":"reports","name":"التقارير","enabled":true,"roles":["system_admin","general_manager","data_entry"]},{"id":"activity","name":"سجل النشاط","enabled":true,"roles":["system_admin","general_manager","data_entry","deduction_officer"]},{"id":"volunteers","name":"المتطوعون","enabled":false,"roles":["system_admin","data_entry","general_manager"]},{"id":"data_management","name":"إدارة البيانات","enabled":true,"roles":["system_admin"]}],"quick_actions":{"whatsapp_quick":true,"remove_call_button":true},"readability":{"target_scan_seconds":5,"dense_tables_collapsible":true}},"staff":{"STF001":{"id":"STF001","name":"عطيه الحربي","role":"system_admin","role_name":"مدير النظام","department_ids":["D1"],"email":"atya@birmashareq.org","phone_masked":"05XX XXX XXX","permissions":{"full_access":true,"manage_settings":true,"manage_users":true,"approve_decisions":true,"year_close":true,"self_test":true,"view_sensitive_data":true},"scope":"all","active":true},"STF002":{"id":"STF002","name":"عيسى اللبدي","role":"general_manager","role_name":"المدير العام","department_ids":["D1"],"email":"issa@birmashareq.org","phone_masked":"05XX XXX XXX","permissions":{"view_all_dashboards":true,"approve_decisions":true,"view_reports":true,"view_sensitive_data":false},"scope":"all_readonly","active":true},"STF003":{"id":"STF003","name":"ابتهاج الطياري","role":"data_entry","role_name":"موظف إدخال","department_ids":["D4"],"email":"ibthaj@birmashareq.org","phone_masked":"05XX XXX XXX","permissions":{"edit_initiatives":true,"add_revenues":true,"manage_donors":true},"scope":{"departments":["D4"],"initiatives":["I01","I02","I45","I46","I47"]},"active":true},"STF004":{"id":"STF004","name":"سارة الحربي","role":"data_entry","role_name":"موظف إدخال","department_ids":["D6"],"email":"sarah@birmashareq.org","phone_masked":"05XX XXX XXX","permissions":{"edit_initiatives":true,"add_tasks":true,"manage_checklists":true},"scope":{"departments":["D6"],"category":["CAT1","CAT3"]},"active":true},"STF005":{"id":"STF005","name":"آمال الحربي","role":"data_entry","role_name":"موظف إدخال","department_ids":["D7","D5","D6"],"email":"amal@birmashareq.org","phone_masked":"05XX XXX XXX","permissions":{"edit_initiatives":true,"manage_beneficiaries":true,"conduct_research":true},"scope":{"departments":["D7","D5","D6"],"category":["CAT2","CAT7","CAT9"]},"active":true,"cross_department_note":"مسؤول عن 6 مبادرات كفالات في إدارة المشاريع (D6)"},"STF006":{"id":"STF006","name":"سحر المرامحي","role":"data_entry","role_name":"موظف إدخال","department_ids":["D2"],"email":"sihr@birmashareq.org","phone_masked":"05XX XXX XXX","permissions":{"add_revenues":true,"add_expenses":true,"manage_budget":true},"scope":{"departments":["D2"],"initiatives":["I19"]},"active":true},"STF007":{"id":"STF007","name":"أحمد الطياري","role":"deduction_officer","role_name":"موظف الاستقطاع","department_ids":["D3","D8","D6"],"email":"ahmed@birmashareq.org","phone_masked":"05XX XXX XXX","permissions":{"manage_deductions":true,"send_whatsapp":true,"view_deduction_analytics":true,"manage_inventory":true},"scope":{"departments":["D3","D8","D6"],"initiatives":["I04"]},"active":true,"cross_department_note":"مسؤول عن مبادرة سقيا الماء I04 في إدارة المشاريع (D6)"},"STF008":{"id":"STF008","name":"شرف الدين","role":"data_entry","role_name":"موظف إدخال","department_ids":["D1","D6"],"email":"sharaf@birmashareq.org","phone_masked":"05XX XXX XXX","permissions":{"edit_initiatives":true,"manage_inventory":true},"scope":{"departments":["D1","D6"],"initiatives":["I05","I10","I11"]},"active":true,"cross_department_note":"مسؤول عن 3 مبادرات (I05, I10, I11) في إدارة المشاريع (D6)"}},"initiatives":{"I01":{"id":"I01","code":"I01","name":"السلة الغذائية","description":"توزيع سلال غذائية شهرية للأسر المستحقة","category_id":"CAT1","department_id":"D6","secondary_department_id":null,"operational_objective_id":"OP5.1","funding_type":"unrestricted","target_group":"أسر محتاجة","baseline":{"value":200,"date":"2025-12-31","unit_id":"U1"},"target":{"value":268,"unit_id":"U1"},"current_value":0,"dates":{"start":"2026-01-01","end":"2026-12-31"},"milestones":[{"id":"MS1","title":"اعتماد معايير الاستحقاق وتسجيل المستفيدين","target_date":"2026-02-28","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS2","title":"تنفيذ الدفعة الأولى (الربع الأول)","target_date":"2026-03-31","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS3","title":"مراجعة منتصف العام وتقييم الأثر المبدئي","target_date":"2026-06-30","phase":"متابعة","status":"not_started","completion_date":null,"notes":""},{"id":"MS4","title":"تنفيذ الدفعات المتبقية والتوسع","target_date":"2026-09-30","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS5","title":"التقييم النهائي وإعداد تقرير الأثر","target_date":"2026-12-15","phase":"إغلاق","status":"not_started","completion_date":null,"notes":""}],"indicators":[{"id":"IND1","name":"عدد المستفيدين الفعليين","type":"output","measurement_frequency":"شهري","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND2","name":"نسبة التنفيذ مقارنة بالمستهدف","type":"efficiency","measurement_frequency":"ربع سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND3","name":"مستوى رضا المستفيدين","type":"outcome","measurement_frequency":"نصف سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null}],"risks":[{"id":"R1","title":"تأخر توفير التمويل الكافي للمبادرة","probability":"medium","impact":"high","mitigation":"تنويع مصادر التمويل وتقديم طلبات مبكرة للمنح","status":"open","owner":"STF004"},{"id":"R2","title":"عدم وصول الخدمة للمستحقين الفعليين","probability":"low","impact":"high","mitigation":"تحديث معايير الاستحقاق وتحقق ميداني دوري","status":"open","owner":"STF004"},{"id":"R3","title":"ارتفاع التكاليف عن التقدير","probability":"medium","impact":"medium","mitigation":"مراجعة الأسعار دورياً والتعاقد مع موردين بأسعار ثابتة","status":"open","owner":"STF004"}],"checklist":[{"id":"CL1","title":"تعريف نطاق المبادرة واعتماد الوصف","status":"not_started","updated_at":null},{"id":"CL2","title":"تحديد المستفيدين ومعايير الاستحقاق","status":"not_started","updated_at":null},{"id":"CL3","title":"تحديد الميزانية وخطة الصرف","status":"not_started","updated_at":null},{"id":"CL4","title":"إعداد خطة التنفيذ والجدول الزمني","status":"not_started","updated_at":null},{"id":"CL5","title":"تنفيذ المرحلة الأولى وتحديث التقدم","status":"not_started","updated_at":null},{"id":"CL6","title":"توثيق الأثر وإغلاق التقرير","status":"not_started","updated_at":null}],"budget":{"estimated_cost":500000,"actual_revenues":500,"actual_expenses":14500,"currency":"SR"},"status":"active","responsible_staff_id":"STF004","created_at":"2026-01-01T00:00:00Z","updated_at":"2026-01-01T00:00:00Z","beneficiaries":["BEN003","BEN005","BEN013","BEN014","BEN016"]},"I02":{"id":"I02","code":"I02","name":"الصدقة اليومية","description":"برنامج دعم يومي للأسر المحتاجة","category_id":"CAT1","department_id":"D6","operational_objective_id":"OP5.1","funding_type":"unrestricted","target_group":"أسر محتاجة","baseline":{"value":0,"date":"2025-12-31","unit_id":"U1"},"target":{"value":100,"unit_id":"U1"},"current_value":0,"dates":{"start":"2026-01-01","end":"2026-12-31"},"budget":{"estimated_cost":150000,"actual_revenues":10500,"actual_expenses":0,"currency":"SR"},"status":"active","responsible_staff_id":"STF004","checklist":[{"id":"CL1","title":"تعريف نطاق المبادرة واعتماد الوصف","status":"not_started","updated_at":null},{"id":"CL2","title":"تحديد المستفيدين ومعايير الاستحقاق","status":"not_started","updated_at":null},{"id":"CL3","title":"تحديد الميزانية وخطة الصرف","status":"not_started","updated_at":null},{"id":"CL4","title":"إعداد خطة التنفيذ والجدول الزمني","status":"not_started","updated_at":null},{"id":"CL5","title":"تنفيذ المرحلة الأولى وتحديث التقدم","status":"not_started","updated_at":null},{"id":"CL6","title":"توثيق الأثر وإغلاق التقرير","status":"not_started","updated_at":null}],"milestones":[{"id":"MS1","title":"اعتماد معايير الاستحقاق وتسجيل المستفيدين","target_date":"2026-02-28","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS2","title":"تنفيذ الدفعة الأولى (الربع الأول)","target_date":"2026-03-31","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS3","title":"مراجعة منتصف العام وتقييم الأثر المبدئي","target_date":"2026-06-30","phase":"متابعة","status":"not_started","completion_date":null,"notes":""},{"id":"MS4","title":"تنفيذ الدفعات المتبقية والتوسع","target_date":"2026-09-30","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS5","title":"التقييم النهائي وإعداد تقرير الأثر","target_date":"2026-12-15","phase":"إغلاق","status":"not_started","completion_date":null,"notes":""}],"indicators":[{"id":"IND1","name":"عدد المستفيدين الفعليين","type":"output","measurement_frequency":"شهري","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND2","name":"نسبة التنفيذ مقارنة بالمستهدف","type":"efficiency","measurement_frequency":"ربع سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND3","name":"مستوى رضا المستفيدين","type":"outcome","measurement_frequency":"نصف سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null}],"risks":[{"id":"R1","title":"تأخر توفير التمويل الكافي للمبادرة","probability":"medium","impact":"high","mitigation":"تنويع مصادر التمويل وتقديم طلبات مبكرة للمنح","status":"open","owner":"STF004"},{"id":"R2","title":"عدم وصول الخدمة للمستحقين الفعليين","probability":"low","impact":"high","mitigation":"تحديث معايير الاستحقاق وتحقق ميداني دوري","status":"open","owner":"STF004"},{"id":"R3","title":"ارتفاع التكاليف عن التقدير","probability":"medium","impact":"medium","mitigation":"مراجعة الأسعار دورياً والتعاقد مع موردين بأسعار ثابتة","status":"open","owner":"STF004"}],"created_at":"2026-01-01T00:00:00Z","updated_at":"2026-01-01T00:00:00Z","beneficiaries":[]},"I03":{"id":"I03","code":"I03","name":"رعاية الأطفال","description":"برنامج دعم ورعاية الأطفال","category_id":"CAT1","department_id":"D6","operational_objective_id":"OP5.1","funding_type":"unrestricted","target_group":"أطفال","baseline":{"value":50,"date":"2025-12-31","unit_id":"U2"},"target":{"value":100,"unit_id":"U2"},"current_value":0,"dates":{"start":"2026-01-01","end":"2026-12-31"},"budget":{"estimated_cost":80000,"actual_revenues":13000,"actual_expenses":3000,"currency":"SR"},"status":"active","responsible_staff_id":"STF004","checklist":[{"id":"CL1","title":"تعريف نطاق المبادرة واعتماد الوصف","status":"not_started","updated_at":null},{"id":"CL2","title":"تحديد المستفيدين ومعايير الاستحقاق","status":"not_started","updated_at":null},{"id":"CL3","title":"تحديد الميزانية وخطة الصرف","status":"not_started","updated_at":null},{"id":"CL4","title":"إعداد خطة التنفيذ والجدول الزمني","status":"not_started","updated_at":null},{"id":"CL5","title":"تنفيذ المرحلة الأولى وتحديث التقدم","status":"not_started","updated_at":null},{"id":"CL6","title":"توثيق الأثر وإغلاق التقرير","status":"not_started","updated_at":null}],"milestones":[{"id":"MS1","title":"اعتماد معايير الاستحقاق وتسجيل المستفيدين","target_date":"2026-02-28","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS2","title":"تنفيذ الدفعة الأولى (الربع الأول)","target_date":"2026-03-31","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS3","title":"مراجعة منتصف العام وتقييم الأثر المبدئي","target_date":"2026-06-30","phase":"متابعة","status":"not_started","completion_date":null,"notes":""},{"id":"MS4","title":"تنفيذ الدفعات المتبقية والتوسع","target_date":"2026-09-30","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS5","title":"التقييم النهائي وإعداد تقرير الأثر","target_date":"2026-12-15","phase":"إغلاق","status":"not_started","completion_date":null,"notes":""}],"indicators":[{"id":"IND1","name":"عدد المستفيدين الفعليين","type":"output","measurement_frequency":"شهري","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND2","name":"نسبة التنفيذ مقارنة بالمستهدف","type":"efficiency","measurement_frequency":"ربع سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND3","name":"مستوى رضا المستفيدين","type":"outcome","measurement_frequency":"نصف سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null}],"risks":[{"id":"R1","title":"تأخر توفير التمويل الكافي للمبادرة","probability":"medium","impact":"high","mitigation":"تنويع مصادر التمويل وتقديم طلبات مبكرة للمنح","status":"open","owner":"STF004"},{"id":"R2","title":"عدم وصول الخدمة للمستحقين الفعليين","probability":"low","impact":"high","mitigation":"تحديث معايير الاستحقاق وتحقق ميداني دوري","status":"open","owner":"STF004"},{"id":"R3","title":"ارتفاع التكاليف عن التقدير","probability":"medium","impact":"medium","mitigation":"مراجعة الأسعار دورياً والتعاقد مع موردين بأسعار ثابتة","status":"open","owner":"STF004"}],"created_at":"2026-01-01T00:00:00Z","updated_at":"2026-01-01T00:00:00Z","beneficiaries":["BEN036"]},"I04":{"id":"I04","code":"I04","name":"سقيا الماء","description":"توفير مياه الشرب","category_id":"CAT1","department_id":"D6","operational_objective_id":"OP5.1","funding_type":"unrestricted","target_group":"عام","baseline":{"value":1000,"date":"2025-12-31","unit_id":"U2"},"target":{"value":2000,"unit_id":"U2"},"current_value":0,"dates":{"start":"2026-01-01","end":"2026-12-31"},"budget":{"estimated_cost":30000,"actual_revenues":1000,"actual_expenses":2000,"currency":"SR"},"status":"active","responsible_staff_id":"STF007","checklist":[{"id":"CL1","title":"تعريف نطاق المبادرة واعتماد الوصف","status":"not_started","updated_at":null},{"id":"CL2","title":"تحديد المستفيدين ومعايير الاستحقاق","status":"not_started","updated_at":null},{"id":"CL3","title":"تحديد الميزانية وخطة الصرف","status":"not_started","updated_at":null},{"id":"CL4","title":"إعداد خطة التنفيذ والجدول الزمني","status":"not_started","updated_at":null},{"id":"CL5","title":"تنفيذ المرحلة الأولى وتحديث التقدم","status":"not_started","updated_at":null},{"id":"CL6","title":"توثيق الأثر وإغلاق التقرير","status":"not_started","updated_at":null}],"milestones":[{"id":"MS1","title":"اعتماد معايير الاستحقاق وتسجيل المستفيدين","target_date":"2026-02-28","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS2","title":"تنفيذ الدفعة الأولى (الربع الأول)","target_date":"2026-03-31","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS3","title":"مراجعة منتصف العام وتقييم الأثر المبدئي","target_date":"2026-06-30","phase":"متابعة","status":"not_started","completion_date":null,"notes":""},{"id":"MS4","title":"تنفيذ الدفعات المتبقية والتوسع","target_date":"2026-09-30","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS5","title":"التقييم النهائي وإعداد تقرير الأثر","target_date":"2026-12-15","phase":"إغلاق","status":"not_started","completion_date":null,"notes":""}],"indicators":[{"id":"IND1","name":"عدد المستفيدين الفعليين","type":"output","measurement_frequency":"شهري","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND2","name":"نسبة التنفيذ مقارنة بالمستهدف","type":"efficiency","measurement_frequency":"ربع سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND3","name":"مستوى رضا المستفيدين","type":"outcome","measurement_frequency":"نصف سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null}],"risks":[{"id":"R1","title":"تأخر توفير التمويل الكافي للمبادرة","probability":"medium","impact":"high","mitigation":"تنويع مصادر التمويل وتقديم طلبات مبكرة للمنح","status":"open","owner":"STF007"},{"id":"R2","title":"عدم وصول الخدمة للمستحقين الفعليين","probability":"low","impact":"high","mitigation":"تحديث معايير الاستحقاق وتحقق ميداني دوري","status":"open","owner":"STF007"},{"id":"R3","title":"ارتفاع التكاليف عن التقدير","probability":"medium","impact":"medium","mitigation":"مراجعة الأسعار دورياً والتعاقد مع موردين بأسعار ثابتة","status":"open","owner":"STF007"}],"created_at":"2026-01-01T00:00:00Z","updated_at":"2026-01-01T00:00:00Z","beneficiaries":["BEN006"]},"I05":{"id":"I05","code":"I05","name":"صدقة اللحوم والدواجن","description":"توزيع لحوم ودواجن","category_id":"CAT1","department_id":"D6","operational_objective_id":"OP5.1","funding_type":"unrestricted","target_group":"أسر محتاجة","baseline":{"value":100,"date":"2025-12-31","unit_id":"U1"},"target":{"value":200,"unit_id":"U1"},"current_value":0,"dates":{"start":"2026-01-01","end":"2026-12-31"},"budget":{"estimated_cost":120000,"actual_revenues":6000,"actual_expenses":1500,"currency":"SR"},"status":"active","responsible_staff_id":"STF008","checklist":[{"id":"CL1","title":"تعريف نطاق المبادرة واعتماد الوصف","status":"not_started","updated_at":null},{"id":"CL2","title":"تحديد المستفيدين ومعايير الاستحقاق","status":"not_started","updated_at":null},{"id":"CL3","title":"تحديد الميزانية وخطة الصرف","status":"not_started","updated_at":null},{"id":"CL4","title":"إعداد خطة التنفيذ والجدول الزمني","status":"not_started","updated_at":null},{"id":"CL5","title":"تنفيذ المرحلة الأولى وتحديث التقدم","status":"not_started","updated_at":null},{"id":"CL6","title":"توثيق الأثر وإغلاق التقرير","status":"not_started","updated_at":null}],"milestones":[{"id":"MS1","title":"اعتماد معايير الاستحقاق وتسجيل المستفيدين","target_date":"2026-02-28","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS2","title":"تنفيذ الدفعة الأولى (الربع الأول)","target_date":"2026-03-31","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS3","title":"مراجعة منتصف العام وتقييم الأثر المبدئي","target_date":"2026-06-30","phase":"متابعة","status":"not_started","completion_date":null,"notes":""},{"id":"MS4","title":"تنفيذ الدفعات المتبقية والتوسع","target_date":"2026-09-30","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS5","title":"التقييم النهائي وإعداد تقرير الأثر","target_date":"2026-12-15","phase":"إغلاق","status":"not_started","completion_date":null,"notes":""}],"indicators":[{"id":"IND1","name":"عدد المستفيدين الفعليين","type":"output","measurement_frequency":"شهري","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND2","name":"نسبة التنفيذ مقارنة بالمستهدف","type":"efficiency","measurement_frequency":"ربع سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND3","name":"مستوى رضا المستفيدين","type":"outcome","measurement_frequency":"نصف سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null}],"risks":[{"id":"R1","title":"تأخر توفير التمويل الكافي للمبادرة","probability":"medium","impact":"high","mitigation":"تنويع مصادر التمويل وتقديم طلبات مبكرة للمنح","status":"open","owner":"STF008"},{"id":"R2","title":"عدم وصول الخدمة للمستحقين الفعليين","probability":"low","impact":"high","mitigation":"تحديث معايير الاستحقاق وتحقق ميداني دوري","status":"open","owner":"STF008"},{"id":"R3","title":"ارتفاع التكاليف عن التقدير","probability":"medium","impact":"medium","mitigation":"مراجعة الأسعار دورياً والتعاقد مع موردين بأسعار ثابتة","status":"open","owner":"STF008"}],"created_at":"2026-01-01T00:00:00Z","updated_at":"2026-01-01T00:00:00Z","beneficiaries":[]},"I06":{"id":"I06","code":"I06","name":"تفريج الكرب","description":"مساعدة المتعثرين في السداد","category_id":"CAT1","department_id":"D6","operational_objective_id":"OP5.1","funding_type":"unrestricted","target_group":"أسر متعثرة","baseline":{"value":20,"date":"2025-12-31","unit_id":"U1"},"target":{"value":50,"unit_id":"U1"},"current_value":0,"dates":{"start":"2026-01-01","end":"2026-12-31"},"budget":{"estimated_cost":200000,"actual_revenues":0,"actual_expenses":3000,"currency":"SR"},"status":"active","responsible_staff_id":"STF004","checklist":[{"id":"CL1","title":"تعريف نطاق المبادرة واعتماد الوصف","status":"not_started","updated_at":null},{"id":"CL2","title":"تحديد المستفيدين ومعايير الاستحقاق","status":"not_started","updated_at":null},{"id":"CL3","title":"تحديد الميزانية وخطة الصرف","status":"not_started","updated_at":null},{"id":"CL4","title":"إعداد خطة التنفيذ والجدول الزمني","status":"not_started","updated_at":null},{"id":"CL5","title":"تنفيذ المرحلة الأولى وتحديث التقدم","status":"not_started","updated_at":null},{"id":"CL6","title":"توثيق الأثر وإغلاق التقرير","status":"not_started","updated_at":null}],"milestones":[{"id":"MS1","title":"اعتماد معايير الاستحقاق وتسجيل المستفيدين","target_date":"2026-02-28","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS2","title":"تنفيذ الدفعة الأولى (الربع الأول)","target_date":"2026-03-31","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS3","title":"مراجعة منتصف العام وتقييم الأثر المبدئي","target_date":"2026-06-30","phase":"متابعة","status":"not_started","completion_date":null,"notes":""},{"id":"MS4","title":"تنفيذ الدفعات المتبقية والتوسع","target_date":"2026-09-30","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS5","title":"التقييم النهائي وإعداد تقرير الأثر","target_date":"2026-12-15","phase":"إغلاق","status":"not_started","completion_date":null,"notes":""}],"indicators":[{"id":"IND1","name":"عدد المستفيدين الفعليين","type":"output","measurement_frequency":"شهري","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND2","name":"نسبة التنفيذ مقارنة بالمستهدف","type":"efficiency","measurement_frequency":"ربع سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND3","name":"مستوى رضا المستفيدين","type":"outcome","measurement_frequency":"نصف سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null}],"risks":[{"id":"R1","title":"تأخر توفير التمويل الكافي للمبادرة","probability":"medium","impact":"high","mitigation":"تنويع مصادر التمويل وتقديم طلبات مبكرة للمنح","status":"open","owner":"STF004"},{"id":"R2","title":"عدم وصول الخدمة للمستحقين الفعليين","probability":"low","impact":"high","mitigation":"تحديث معايير الاستحقاق وتحقق ميداني دوري","status":"open","owner":"STF004"},{"id":"R3","title":"ارتفاع التكاليف عن التقدير","probability":"medium","impact":"medium","mitigation":"مراجعة الأسعار دورياً والتعاقد مع موردين بأسعار ثابتة","status":"open","owner":"STF004"}],"created_at":"2026-01-01T00:00:00Z","updated_at":"2026-01-01T00:00:00Z","beneficiaries":[]},"I07":{"id":"I07","code":"I07","name":"نقل الطالبات الجامعي","description":"توفير نقل للطالبات الجامعيات","category_id":"CAT1","department_id":"D6","operational_objective_id":"OP5.1","funding_type":"unrestricted","target_group":"طالبات جامعيات","baseline":{"value":10,"date":"2025-12-31","unit_id":"U2"},"target":{"value":30,"unit_id":"U2"},"current_value":0,"dates":{"start":"2026-01-01","end":"2026-12-31"},"budget":{"estimated_cost":60000,"actual_revenues":2000,"actual_expenses":0,"currency":"SR"},"status":"active","responsible_staff_id":"STF004","checklist":[{"id":"CL1","title":"تعريف نطاق المبادرة واعتماد الوصف","status":"not_started","updated_at":null},{"id":"CL2","title":"تحديد المستفيدين ومعايير الاستحقاق","status":"not_started","updated_at":null},{"id":"CL3","title":"تحديد الميزانية وخطة الصرف","status":"not_started","updated_at":null},{"id":"CL4","title":"إعداد خطة التنفيذ والجدول الزمني","status":"not_started","updated_at":null},{"id":"CL5","title":"تنفيذ المرحلة الأولى وتحديث التقدم","status":"not_started","updated_at":null},{"id":"CL6","title":"توثيق الأثر وإغلاق التقرير","status":"not_started","updated_at":null}],"milestones":[{"id":"MS1","title":"اعتماد معايير الاستحقاق وتسجيل المستفيدين","target_date":"2026-02-28","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS2","title":"تنفيذ الدفعة الأولى (الربع الأول)","target_date":"2026-03-31","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS3","title":"مراجعة منتصف العام وتقييم الأثر المبدئي","target_date":"2026-06-30","phase":"متابعة","status":"not_started","completion_date":null,"notes":""},{"id":"MS4","title":"تنفيذ الدفعات المتبقية والتوسع","target_date":"2026-09-30","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS5","title":"التقييم النهائي وإعداد تقرير الأثر","target_date":"2026-12-15","phase":"إغلاق","status":"not_started","completion_date":null,"notes":""}],"indicators":[{"id":"IND1","name":"عدد المستفيدين الفعليين","type":"output","measurement_frequency":"شهري","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND2","name":"نسبة التنفيذ مقارنة بالمستهدف","type":"efficiency","measurement_frequency":"ربع سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND3","name":"مستوى رضا المستفيدين","type":"outcome","measurement_frequency":"نصف سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null}],"risks":[{"id":"R1","title":"تأخر توفير التمويل الكافي للمبادرة","probability":"medium","impact":"high","mitigation":"تنويع مصادر التمويل وتقديم طلبات مبكرة للمنح","status":"open","owner":"STF004"},{"id":"R2","title":"عدم وصول الخدمة للمستحقين الفعليين","probability":"low","impact":"high","mitigation":"تحديث معايير الاستحقاق وتحقق ميداني دوري","status":"open","owner":"STF004"},{"id":"R3","title":"ارتفاع التكاليف عن التقدير","probability":"medium","impact":"medium","mitigation":"مراجعة الأسعار دورياً والتعاقد مع موردين بأسعار ثابتة","status":"open","owner":"STF004"}],"created_at":"2026-01-01T00:00:00Z","updated_at":"2026-01-01T00:00:00Z","beneficiaries":["BEN010"]},"I08":{"id":"I08","code":"I08","name":"ترميم المنازل","description":"ترميم منازل الأسر المحتاجة","category_id":"CAT1","department_id":"D6","operational_objective_id":"OP5.1","funding_type":"restricted","target_group":"أسر محتاجة","baseline":{"value":5,"date":"2025-12-31","unit_id":"U1"},"target":{"value":15,"unit_id":"U1"},"current_value":0,"dates":{"start":"2026-01-01","end":"2026-12-31"},"budget":{"estimated_cost":300000,"actual_revenues":2500,"actual_expenses":0,"currency":"SR"},"status":"active","responsible_staff_id":"STF004","checklist":[{"id":"CL1","title":"تعريف نطاق المبادرة واعتماد الوصف","status":"not_started","updated_at":null},{"id":"CL2","title":"تحديد المستفيدين ومعايير الاستحقاق","status":"not_started","updated_at":null},{"id":"CL3","title":"تحديد الميزانية وخطة الصرف","status":"not_started","updated_at":null},{"id":"CL4","title":"إعداد خطة التنفيذ والجدول الزمني","status":"not_started","updated_at":null},{"id":"CL5","title":"تنفيذ المرحلة الأولى وتحديث التقدم","status":"not_started","updated_at":null},{"id":"CL6","title":"توثيق الأثر وإغلاق التقرير","status":"not_started","updated_at":null}],"milestones":[{"id":"MS1","title":"اعتماد معايير الاستحقاق وتسجيل المستفيدين","target_date":"2026-02-28","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS2","title":"تنفيذ الدفعة الأولى (الربع الأول)","target_date":"2026-03-31","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS3","title":"مراجعة منتصف العام وتقييم الأثر المبدئي","target_date":"2026-06-30","phase":"متابعة","status":"not_started","completion_date":null,"notes":""},{"id":"MS4","title":"تنفيذ الدفعات المتبقية والتوسع","target_date":"2026-09-30","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS5","title":"التقييم النهائي وإعداد تقرير الأثر","target_date":"2026-12-15","phase":"إغلاق","status":"not_started","completion_date":null,"notes":""}],"indicators":[{"id":"IND1","name":"عدد المستفيدين الفعليين","type":"output","measurement_frequency":"شهري","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND2","name":"نسبة التنفيذ مقارنة بالمستهدف","type":"efficiency","measurement_frequency":"ربع سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND3","name":"مستوى رضا المستفيدين","type":"outcome","measurement_frequency":"نصف سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null}],"risks":[{"id":"R1","title":"تأخر توفير التمويل الكافي للمبادرة","probability":"medium","impact":"high","mitigation":"تنويع مصادر التمويل وتقديم طلبات مبكرة للمنح","status":"open","owner":"STF004"},{"id":"R2","title":"عدم وصول الخدمة للمستحقين الفعليين","probability":"low","impact":"high","mitigation":"تحديث معايير الاستحقاق وتحقق ميداني دوري","status":"open","owner":"STF004"},{"id":"R3","title":"ارتفاع التكاليف عن التقدير","probability":"medium","impact":"medium","mitigation":"مراجعة الأسعار دورياً والتعاقد مع موردين بأسعار ثابتة","status":"open","owner":"STF004"}],"created_at":"2026-01-01T00:00:00Z","updated_at":"2026-01-01T00:00:00Z","beneficiaries":[]},"I09":{"id":"I09","code":"I09","name":"الصيانة الخفيفة للمنازل","description":"صيانة بسيطة للمنازل","category_id":"CAT1","department_id":"D6","operational_objective_id":"OP5.1","funding_type":"unrestricted","target_group":"أسر محتاجة","baseline":{"value":30,"date":"2025-12-31","unit_id":"U9"},"target":{"value":60,"unit_id":"U9"},"current_value":0,"dates":{"start":"2026-01-01","end":"2026-12-31"},"budget":{"estimated_cost":50000,"actual_revenues":5000,"actual_expenses":0,"currency":"SR"},"status":"active","responsible_staff_id":"STF004","checklist":[{"id":"CL1","title":"تعريف نطاق المبادرة واعتماد الوصف","status":"not_started","updated_at":null},{"id":"CL2","title":"تحديد المستفيدين ومعايير الاستحقاق","status":"not_started","updated_at":null},{"id":"CL3","title":"تحديد الميزانية وخطة الصرف","status":"not_started","updated_at":null},{"id":"CL4","title":"إعداد خطة التنفيذ والجدول الزمني","status":"not_started","updated_at":null},{"id":"CL5","title":"تنفيذ المرحلة الأولى وتحديث التقدم","status":"not_started","updated_at":null},{"id":"CL6","title":"توثيق الأثر وإغلاق التقرير","status":"not_started","updated_at":null}],"milestones":[{"id":"MS1","title":"اعتماد معايير الاستحقاق وتسجيل المستفيدين","target_date":"2026-02-28","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS2","title":"تنفيذ الدفعة الأولى (الربع الأول)","target_date":"2026-03-31","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS3","title":"مراجعة منتصف العام وتقييم الأثر المبدئي","target_date":"2026-06-30","phase":"متابعة","status":"not_started","completion_date":null,"notes":""},{"id":"MS4","title":"تنفيذ الدفعات المتبقية والتوسع","target_date":"2026-09-30","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS5","title":"التقييم النهائي وإعداد تقرير الأثر","target_date":"2026-12-15","phase":"إغلاق","status":"not_started","completion_date":null,"notes":""}],"indicators":[{"id":"IND1","name":"عدد المستفيدين الفعليين","type":"output","measurement_frequency":"شهري","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND2","name":"نسبة التنفيذ مقارنة بالمستهدف","type":"efficiency","measurement_frequency":"ربع سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND3","name":"مستوى رضا المستفيدين","type":"outcome","measurement_frequency":"نصف سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null}],"risks":[{"id":"R1","title":"تأخر توفير التمويل الكافي للمبادرة","probability":"medium","impact":"high","mitigation":"تنويع مصادر التمويل وتقديم طلبات مبكرة للمنح","status":"open","owner":"STF004"},{"id":"R2","title":"عدم وصول الخدمة للمستحقين الفعليين","probability":"low","impact":"high","mitigation":"تحديث معايير الاستحقاق وتحقق ميداني دوري","status":"open","owner":"STF004"},{"id":"R3","title":"ارتفاع التكاليف عن التقدير","probability":"medium","impact":"medium","mitigation":"مراجعة الأسعار دورياً والتعاقد مع موردين بأسعار ثابتة","status":"open","owner":"STF004"}],"created_at":"2026-01-01T00:00:00Z","updated_at":"2026-01-01T00:00:00Z","beneficiaries":[]},"I10":{"id":"I10","code":"I10","name":"استبدال الأجهزة الكهربائية","description":"استبدال الأجهزة التالفة","category_id":"CAT1","department_id":"D6","operational_objective_id":"OP5.1","funding_type":"unrestricted","target_group":"أسر محتاجة","baseline":{"value":40,"date":"2025-12-31","unit_id":"U5"},"target":{"value":80,"unit_id":"U5"},"current_value":0,"dates":{"start":"2026-01-01","end":"2026-12-31"},"budget":{"estimated_cost":100000,"actual_revenues":2500,"actual_expenses":500,"currency":"SR"},"status":"active","responsible_staff_id":"STF008","checklist":[{"id":"CL1","title":"تعريف نطاق المبادرة واعتماد الوصف","status":"not_started","updated_at":null},{"id":"CL2","title":"تحديد المستفيدين ومعايير الاستحقاق","status":"not_started","updated_at":null},{"id":"CL3","title":"تحديد الميزانية وخطة الصرف","status":"not_started","updated_at":null},{"id":"CL4","title":"إعداد خطة التنفيذ والجدول الزمني","status":"not_started","updated_at":null},{"id":"CL5","title":"تنفيذ المرحلة الأولى وتحديث التقدم","status":"not_started","updated_at":null},{"id":"CL6","title":"توثيق الأثر وإغلاق التقرير","status":"not_started","updated_at":null}],"milestones":[{"id":"MS1","title":"اعتماد معايير الاستحقاق وتسجيل المستفيدين","target_date":"2026-02-28","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS2","title":"تنفيذ الدفعة الأولى (الربع الأول)","target_date":"2026-03-31","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS3","title":"مراجعة منتصف العام وتقييم الأثر المبدئي","target_date":"2026-06-30","phase":"متابعة","status":"not_started","completion_date":null,"notes":""},{"id":"MS4","title":"تنفيذ الدفعات المتبقية والتوسع","target_date":"2026-09-30","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS5","title":"التقييم النهائي وإعداد تقرير الأثر","target_date":"2026-12-15","phase":"إغلاق","status":"not_started","completion_date":null,"notes":""}],"indicators":[{"id":"IND1","name":"عدد المستفيدين الفعليين","type":"output","measurement_frequency":"شهري","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND2","name":"نسبة التنفيذ مقارنة بالمستهدف","type":"efficiency","measurement_frequency":"ربع سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND3","name":"مستوى رضا المستفيدين","type":"outcome","measurement_frequency":"نصف سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null}],"risks":[{"id":"R1","title":"تأخر توفير التمويل الكافي للمبادرة","probability":"medium","impact":"high","mitigation":"تنويع مصادر التمويل وتقديم طلبات مبكرة للمنح","status":"open","owner":"STF008"},{"id":"R2","title":"عدم وصول الخدمة للمستحقين الفعليين","probability":"low","impact":"high","mitigation":"تحديث معايير الاستحقاق وتحقق ميداني دوري","status":"open","owner":"STF008"},{"id":"R3","title":"ارتفاع التكاليف عن التقدير","probability":"medium","impact":"medium","mitigation":"مراجعة الأسعار دورياً والتعاقد مع موردين بأسعار ثابتة","status":"open","owner":"STF008"}],"created_at":"2026-01-01T00:00:00Z","updated_at":"2026-01-01T00:00:00Z","beneficiaries":[]},"I11":{"id":"I11","code":"I11","name":"صيانة الأجهزة الكهربائية","description":"صيانة الأجهزة المعطلة","category_id":"CAT1","department_id":"D6","operational_objective_id":"OP5.1","funding_type":"unrestricted","target_group":"أسر محتاجة","baseline":{"value":50,"date":"2025-12-31","unit_id":"U5"},"target":{"value":100,"unit_id":"U5"},"current_value":0,"dates":{"start":"2026-01-01","end":"2026-12-31"},"budget":{"estimated_cost":40000,"actual_revenues":0,"actual_expenses":1000,"currency":"SR"},"status":"active","responsible_staff_id":"STF008","checklist":[{"id":"CL1","title":"تعريف نطاق المبادرة واعتماد الوصف","status":"not_started","updated_at":null},{"id":"CL2","title":"تحديد المستفيدين ومعايير الاستحقاق","status":"not_started","updated_at":null},{"id":"CL3","title":"تحديد الميزانية وخطة الصرف","status":"not_started","updated_at":null},{"id":"CL4","title":"إعداد خطة التنفيذ والجدول الزمني","status":"not_started","updated_at":null},{"id":"CL5","title":"تنفيذ المرحلة الأولى وتحديث التقدم","status":"not_started","updated_at":null},{"id":"CL6","title":"توثيق الأثر وإغلاق التقرير","status":"not_started","updated_at":null}],"milestones":[{"id":"MS1","title":"اعتماد معايير الاستحقاق وتسجيل المستفيدين","target_date":"2026-02-28","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS2","title":"تنفيذ الدفعة الأولى (الربع الأول)","target_date":"2026-03-31","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS3","title":"مراجعة منتصف العام وتقييم الأثر المبدئي","target_date":"2026-06-30","phase":"متابعة","status":"not_started","completion_date":null,"notes":""},{"id":"MS4","title":"تنفيذ الدفعات المتبقية والتوسع","target_date":"2026-09-30","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS5","title":"التقييم النهائي وإعداد تقرير الأثر","target_date":"2026-12-15","phase":"إغلاق","status":"not_started","completion_date":null,"notes":""}],"indicators":[{"id":"IND1","name":"عدد المستفيدين الفعليين","type":"output","measurement_frequency":"شهري","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND2","name":"نسبة التنفيذ مقارنة بالمستهدف","type":"efficiency","measurement_frequency":"ربع سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND3","name":"مستوى رضا المستفيدين","type":"outcome","measurement_frequency":"نصف سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null}],"risks":[{"id":"R1","title":"تأخر توفير التمويل الكافي للمبادرة","probability":"medium","impact":"high","mitigation":"تنويع مصادر التمويل وتقديم طلبات مبكرة للمنح","status":"open","owner":"STF008"},{"id":"R2","title":"عدم وصول الخدمة للمستحقين الفعليين","probability":"low","impact":"high","mitigation":"تحديث معايير الاستحقاق وتحقق ميداني دوري","status":"open","owner":"STF008"},{"id":"R3","title":"ارتفاع التكاليف عن التقدير","probability":"medium","impact":"medium","mitigation":"مراجعة الأسعار دورياً والتعاقد مع موردين بأسعار ثابتة","status":"open","owner":"STF008"}],"created_at":"2026-01-01T00:00:00Z","updated_at":"2026-01-01T00:00:00Z","beneficiaries":["BEN012","BEN017","BEN024","BEN039"]},"I12":{"id":"I12","code":"I12","name":"كفالة أيتام","description":"كفالة الأيتام شهرياً","category_id":"CAT2","department_id":"D6","operational_objective_id":"OP5.1","funding_type":"restricted","target_group":"أيتام","baseline":{"value":80,"date":"2025-12-31","unit_id":"U3"},"target":{"value":120,"unit_id":"U3"},"current_value":0,"dates":{"start":"2026-01-01","end":"2026-12-31"},"budget":{"estimated_cost":360000,"actual_revenues":0,"actual_expenses":0,"currency":"SR"},"status":"active","responsible_staff_id":"STF005","checklist":[{"id":"CL1","title":"تعريف نطاق المبادرة واعتماد الوصف","status":"not_started","updated_at":null},{"id":"CL2","title":"تحديد المستفيدين ومعايير الاستحقاق","status":"not_started","updated_at":null},{"id":"CL3","title":"تحديد الميزانية وخطة الصرف","status":"not_started","updated_at":null},{"id":"CL4","title":"إعداد خطة التنفيذ والجدول الزمني","status":"not_started","updated_at":null},{"id":"CL5","title":"تنفيذ المرحلة الأولى وتحديث التقدم","status":"not_started","updated_at":null},{"id":"CL6","title":"توثيق الأثر وإغلاق التقرير","status":"not_started","updated_at":null}],"milestones":[{"id":"MS1","title":"تحديث بيانات المكفولين والتحقق من الاستحقاق","target_date":"2026-02-15","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS2","title":"صرف كفالات الربع الأول","target_date":"2026-03-31","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS3","title":"متابعة ميدانية ورصد التحسن","target_date":"2026-06-30","phase":"متابعة","status":"not_started","completion_date":null,"notes":""},{"id":"MS4","title":"صرف كفالات النصف الثاني","target_date":"2026-09-30","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS5","title":"تقييم سنوي شامل وتقرير الكفالات","target_date":"2026-12-15","phase":"إغلاق","status":"not_started","completion_date":null,"notes":""}],"indicators":[{"id":"IND1","name":"عدد المكفولين النشطين","type":"output","measurement_frequency":"شهري","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND2","name":"نسبة الالتزام بالصرف في الموعد","type":"efficiency","measurement_frequency":"شهري","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND3","name":"مستوى تحسن وضع المكفولين","type":"outcome","measurement_frequency":"سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null}],"risks":[{"id":"R1","title":"تأخر صرف الكفالات عن الموعد المحدد","probability":"medium","impact":"high","mitigation":"تجهيز الكفالات قبل الموعد بأسبوعين وتوفير احتياطي","status":"open","owner":"STF005"},{"id":"R2","title":"انسحاب كفيل رئيسي","probability":"low","impact":"high","mitigation":"قائمة انتظار من الكفلاء البدلاء وتنويع المصادر","status":"open","owner":"STF005"}],"created_at":"2026-01-01T00:00:00Z","updated_at":"2026-01-01T00:00:00Z","beneficiaries":["BEN007","BEN014","BEN030"]},"I13":{"id":"I13","code":"I13","name":"كفالة أسر","description":"كفالة الأسر شهرياً","category_id":"CAT2","department_id":"D6","operational_objective_id":"OP5.1","funding_type":"restricted","target_group":"أسر محتاجة","baseline":{"value":150,"date":"2025-12-31","unit_id":"U1"},"target":{"value":200,"unit_id":"U1"},"current_value":0,"dates":{"start":"2026-01-01","end":"2026-12-31"},"budget":{"estimated_cost":600000,"actual_revenues":0,"actual_expenses":0,"currency":"SR"},"status":"active","responsible_staff_id":"STF005","checklist":[{"id":"CL1","title":"تعريف نطاق المبادرة واعتماد الوصف","status":"not_started","updated_at":null},{"id":"CL2","title":"تحديد المستفيدين ومعايير الاستحقاق","status":"not_started","updated_at":null},{"id":"CL3","title":"تحديد الميزانية وخطة الصرف","status":"not_started","updated_at":null},{"id":"CL4","title":"إعداد خطة التنفيذ والجدول الزمني","status":"not_started","updated_at":null},{"id":"CL5","title":"تنفيذ المرحلة الأولى وتحديث التقدم","status":"not_started","updated_at":null},{"id":"CL6","title":"توثيق الأثر وإغلاق التقرير","status":"not_started","updated_at":null}],"milestones":[{"id":"MS1","title":"تحديث بيانات المكفولين والتحقق من الاستحقاق","target_date":"2026-02-15","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS2","title":"صرف كفالات الربع الأول","target_date":"2026-03-31","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS3","title":"متابعة ميدانية ورصد التحسن","target_date":"2026-06-30","phase":"متابعة","status":"not_started","completion_date":null,"notes":""},{"id":"MS4","title":"صرف كفالات النصف الثاني","target_date":"2026-09-30","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS5","title":"تقييم سنوي شامل وتقرير الكفالات","target_date":"2026-12-15","phase":"إغلاق","status":"not_started","completion_date":null,"notes":""}],"indicators":[{"id":"IND1","name":"عدد المكفولين النشطين","type":"output","measurement_frequency":"شهري","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND2","name":"نسبة الالتزام بالصرف في الموعد","type":"efficiency","measurement_frequency":"شهري","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND3","name":"مستوى تحسن وضع المكفولين","type":"outcome","measurement_frequency":"سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null}],"risks":[{"id":"R1","title":"تأخر صرف الكفالات عن الموعد المحدد","probability":"medium","impact":"high","mitigation":"تجهيز الكفالات قبل الموعد بأسبوعين وتوفير احتياطي","status":"open","owner":"STF005"},{"id":"R2","title":"انسحاب كفيل رئيسي","probability":"low","impact":"high","mitigation":"قائمة انتظار من الكفلاء البدلاء وتنويع المصادر","status":"open","owner":"STF005"}],"created_at":"2026-01-01T00:00:00Z","updated_at":"2026-01-01T00:00:00Z","beneficiaries":[]},"I14":{"id":"I14","code":"I14","name":"كفالة كبار السن","description":"كفالة كبار السن شهرياً","category_id":"CAT2","department_id":"D6","operational_objective_id":"OP5.1","funding_type":"restricted","target_group":"كبار السن","baseline":{"value":30,"date":"2025-12-31","unit_id":"U4"},"target":{"value":50,"unit_id":"U4"},"current_value":0,"dates":{"start":"2026-01-01","end":"2026-12-31"},"budget":{"estimated_cost":120000,"actual_revenues":0,"actual_expenses":0,"currency":"SR"},"status":"active","responsible_staff_id":"STF005","checklist":[{"id":"CL1","title":"تعريف نطاق المبادرة واعتماد الوصف","status":"not_started","updated_at":null},{"id":"CL2","title":"تحديد المستفيدين ومعايير الاستحقاق","status":"not_started","updated_at":null},{"id":"CL3","title":"تحديد الميزانية وخطة الصرف","status":"not_started","updated_at":null},{"id":"CL4","title":"إعداد خطة التنفيذ والجدول الزمني","status":"not_started","updated_at":null},{"id":"CL5","title":"تنفيذ المرحلة الأولى وتحديث التقدم","status":"not_started","updated_at":null},{"id":"CL6","title":"توثيق الأثر وإغلاق التقرير","status":"not_started","updated_at":null}],"milestones":[{"id":"MS1","title":"تحديث بيانات المكفولين والتحقق من الاستحقاق","target_date":"2026-02-15","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS2","title":"صرف كفالات الربع الأول","target_date":"2026-03-31","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS3","title":"متابعة ميدانية ورصد التحسن","target_date":"2026-06-30","phase":"متابعة","status":"not_started","completion_date":null,"notes":""},{"id":"MS4","title":"صرف كفالات النصف الثاني","target_date":"2026-09-30","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS5","title":"تقييم سنوي شامل وتقرير الكفالات","target_date":"2026-12-15","phase":"إغلاق","status":"not_started","completion_date":null,"notes":""}],"indicators":[{"id":"IND1","name":"عدد المكفولين النشطين","type":"output","measurement_frequency":"شهري","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND2","name":"نسبة الالتزام بالصرف في الموعد","type":"efficiency","measurement_frequency":"شهري","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND3","name":"مستوى تحسن وضع المكفولين","type":"outcome","measurement_frequency":"سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null}],"risks":[{"id":"R1","title":"تأخر صرف الكفالات عن الموعد المحدد","probability":"medium","impact":"high","mitigation":"تجهيز الكفالات قبل الموعد بأسبوعين وتوفير احتياطي","status":"open","owner":"STF005"},{"id":"R2","title":"انسحاب كفيل رئيسي","probability":"low","impact":"high","mitigation":"قائمة انتظار من الكفلاء البدلاء وتنويع المصادر","status":"open","owner":"STF005"}],"created_at":"2026-01-01T00:00:00Z","updated_at":"2026-01-01T00:00:00Z","beneficiaries":["BEN011","BEN040"]},"I15":{"id":"I15","code":"I15","name":"كفالة مرضى","description":"كفالة المرضى شهرياً","category_id":"CAT2","department_id":"D6","operational_objective_id":"OP5.1","funding_type":"restricted","target_group":"مرضى","baseline":{"value":20,"date":"2025-12-31","unit_id":"U2"},"target":{"value":40,"unit_id":"U2"},"current_value":0,"dates":{"start":"2026-01-01","end":"2026-12-31"},"budget":{"estimated_cost":100000,"actual_revenues":22500,"actual_expenses":0,"currency":"SR"},"status":"active","responsible_staff_id":"STF005","checklist":[{"id":"CL1","title":"تعريف نطاق المبادرة واعتماد الوصف","status":"not_started","updated_at":null},{"id":"CL2","title":"تحديد المستفيدين ومعايير الاستحقاق","status":"not_started","updated_at":null},{"id":"CL3","title":"تحديد الميزانية وخطة الصرف","status":"not_started","updated_at":null},{"id":"CL4","title":"إعداد خطة التنفيذ والجدول الزمني","status":"not_started","updated_at":null},{"id":"CL5","title":"تنفيذ المرحلة الأولى وتحديث التقدم","status":"not_started","updated_at":null},{"id":"CL6","title":"توثيق الأثر وإغلاق التقرير","status":"not_started","updated_at":null}],"milestones":[{"id":"MS1","title":"تحديث بيانات المكفولين والتحقق من الاستحقاق","target_date":"2026-02-15","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS2","title":"صرف كفالات الربع الأول","target_date":"2026-03-31","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS3","title":"متابعة ميدانية ورصد التحسن","target_date":"2026-06-30","phase":"متابعة","status":"not_started","completion_date":null,"notes":""},{"id":"MS4","title":"صرف كفالات النصف الثاني","target_date":"2026-09-30","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS5","title":"تقييم سنوي شامل وتقرير الكفالات","target_date":"2026-12-15","phase":"إغلاق","status":"not_started","completion_date":null,"notes":""}],"indicators":[{"id":"IND1","name":"عدد المكفولين النشطين","type":"output","measurement_frequency":"شهري","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND2","name":"نسبة الالتزام بالصرف في الموعد","type":"efficiency","measurement_frequency":"شهري","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND3","name":"مستوى تحسن وضع المكفولين","type":"outcome","measurement_frequency":"سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null}],"risks":[{"id":"R1","title":"تأخر صرف الكفالات عن الموعد المحدد","probability":"medium","impact":"high","mitigation":"تجهيز الكفالات قبل الموعد بأسبوعين وتوفير احتياطي","status":"open","owner":"STF005"},{"id":"R2","title":"انسحاب كفيل رئيسي","probability":"low","impact":"high","mitigation":"قائمة انتظار من الكفلاء البدلاء وتنويع المصادر","status":"open","owner":"STF005"}],"created_at":"2026-01-01T00:00:00Z","updated_at":"2026-01-01T00:00:00Z","beneficiaries":["BEN023"]},"I16":{"id":"I16","code":"I16","name":"كفالة أرامل ومطلقات","description":"كفالة الأرامل والمطلقات شهرياً","category_id":"CAT2","department_id":"D6","operational_objective_id":"OP5.1","funding_type":"restricted","target_group":"أرامل ومطلقات","baseline":{"value":40,"date":"2025-12-31","unit_id":"U2"},"target":{"value":70,"unit_id":"U2"},"current_value":0,"dates":{"start":"2026-01-01","end":"2026-12-31"},"budget":{"estimated_cost":180000,"actual_revenues":7500,"actual_expenses":0,"currency":"SR"},"status":"active","responsible_staff_id":"STF005","checklist":[{"id":"CL1","title":"تعريف نطاق المبادرة واعتماد الوصف","status":"not_started","updated_at":null},{"id":"CL2","title":"تحديد المستفيدين ومعايير الاستحقاق","status":"not_started","updated_at":null},{"id":"CL3","title":"تحديد الميزانية وخطة الصرف","status":"not_started","updated_at":null},{"id":"CL4","title":"إعداد خطة التنفيذ والجدول الزمني","status":"not_started","updated_at":null},{"id":"CL5","title":"تنفيذ المرحلة الأولى وتحديث التقدم","status":"not_started","updated_at":null},{"id":"CL6","title":"توثيق الأثر وإغلاق التقرير","status":"not_started","updated_at":null}],"milestones":[{"id":"MS1","title":"تحديث بيانات المكفولين والتحقق من الاستحقاق","target_date":"2026-02-15","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS2","title":"صرف كفالات الربع الأول","target_date":"2026-03-31","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS3","title":"متابعة ميدانية ورصد التحسن","target_date":"2026-06-30","phase":"متابعة","status":"not_started","completion_date":null,"notes":""},{"id":"MS4","title":"صرف كفالات النصف الثاني","target_date":"2026-09-30","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS5","title":"تقييم سنوي شامل وتقرير الكفالات","target_date":"2026-12-15","phase":"إغلاق","status":"not_started","completion_date":null,"notes":""}],"indicators":[{"id":"IND1","name":"عدد المكفولين النشطين","type":"output","measurement_frequency":"شهري","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND2","name":"نسبة الالتزام بالصرف في الموعد","type":"efficiency","measurement_frequency":"شهري","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND3","name":"مستوى تحسن وضع المكفولين","type":"outcome","measurement_frequency":"سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null}],"risks":[{"id":"R1","title":"تأخر صرف الكفالات عن الموعد المحدد","probability":"medium","impact":"high","mitigation":"تجهيز الكفالات قبل الموعد بأسبوعين وتوفير احتياطي","status":"open","owner":"STF005"},{"id":"R2","title":"انسحاب كفيل رئيسي","probability":"low","impact":"high","mitigation":"قائمة انتظار من الكفلاء البدلاء وتنويع المصادر","status":"open","owner":"STF005"}],"created_at":"2026-01-01T00:00:00Z","updated_at":"2026-01-01T00:00:00Z","beneficiaries":[]},"I17":{"id":"I17","code":"I17","name":"كفالة أسر السجناء","description":"كفالة أسر السجناء شهرياً","category_id":"CAT2","department_id":"D6","operational_objective_id":"OP5.1","funding_type":"restricted","target_group":"أسر سجناء","baseline":{"value":10,"date":"2025-12-31","unit_id":"U1"},"target":{"value":25,"unit_id":"U1"},"current_value":0,"dates":{"start":"2026-01-01","end":"2026-12-31"},"budget":{"estimated_cost":75000,"actual_revenues":0,"actual_expenses":2500,"currency":"SR"},"status":"active","responsible_staff_id":"STF005","checklist":[{"id":"CL1","title":"تعريف نطاق المبادرة واعتماد الوصف","status":"not_started","updated_at":null},{"id":"CL2","title":"تحديد المستفيدين ومعايير الاستحقاق","status":"not_started","updated_at":null},{"id":"CL3","title":"تحديد الميزانية وخطة الصرف","status":"not_started","updated_at":null},{"id":"CL4","title":"إعداد خطة التنفيذ والجدول الزمني","status":"not_started","updated_at":null},{"id":"CL5","title":"تنفيذ المرحلة الأولى وتحديث التقدم","status":"not_started","updated_at":null},{"id":"CL6","title":"توثيق الأثر وإغلاق التقرير","status":"not_started","updated_at":null}],"milestones":[{"id":"MS1","title":"تحديث بيانات المكفولين والتحقق من الاستحقاق","target_date":"2026-02-15","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS2","title":"صرف كفالات الربع الأول","target_date":"2026-03-31","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS3","title":"متابعة ميدانية ورصد التحسن","target_date":"2026-06-30","phase":"متابعة","status":"not_started","completion_date":null,"notes":""},{"id":"MS4","title":"صرف كفالات النصف الثاني","target_date":"2026-09-30","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS5","title":"تقييم سنوي شامل وتقرير الكفالات","target_date":"2026-12-15","phase":"إغلاق","status":"not_started","completion_date":null,"notes":""}],"indicators":[{"id":"IND1","name":"عدد المكفولين النشطين","type":"output","measurement_frequency":"شهري","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND2","name":"نسبة الالتزام بالصرف في الموعد","type":"efficiency","measurement_frequency":"شهري","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND3","name":"مستوى تحسن وضع المكفولين","type":"outcome","measurement_frequency":"سنوي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null}],"risks":[{"id":"R1","title":"تأخر صرف الكفالات عن الموعد المحدد","probability":"medium","impact":"high","mitigation":"تجهيز الكفالات قبل الموعد بأسبوعين وتوفير احتياطي","status":"open","owner":"STF005"},{"id":"R2","title":"انسحاب كفيل رئيسي","probability":"low","impact":"high","mitigation":"قائمة انتظار من الكفلاء البدلاء وتنويع المصادر","status":"open","owner":"STF005"}],"created_at":"2026-01-01T00:00:00Z","updated_at":"2026-01-01T00:00:00Z","beneficiaries":[]},"I18":{"id":"I18","code":"I18","name":"زكاة المال","description":"استقبال وتوزيع زكاة المال","category_id":"CAT3","department_id":"D2","operational_objective_id":"OP1.1","funding_type":"restricted","target_group":"مستحقي الزكاة","baseline":{"value":500000,"date":"2025-12-31","unit_id":"U12"},"target":{"value":800000,"unit_id":"U12"},"current_value":0,"dates":{"start":"2026-01-01","end":"2026-12-31"},"budget":{"estimated_cost":500000,"actual_revenues":3500,"actual_expenses":0,"currency":"SR","budget_note":"زكاة المال — مبادرة إيرادية بطبيعتها، التقدير يمثل المستهدف من الزكاة"},"status":"active","responsible_staff_id":"STF006","checklist":[{"id":"CL1","title":"تعريف نطاق المبادرة واعتماد الوصف","status":"not_started","updated_at":null},{"id":"CL2","title":"تحديد المستفيدين ومعايير الاستحقاق","status":"not_started","updated_at":null},{"id":"CL3","title":"تحديد الميزانية وخطة الصرف","status":"not_started","updated_at":null},{"id":"CL4","title":"إعداد خطة التنفيذ والجدول الزمني","status":"not_started","updated_at":null},{"id":"CL5","title":"تنفيذ المرحلة الأولى وتحديث التقدم","status":"not_started","updated_at":null},{"id":"CL6","title":"توثيق الأثر وإغلاق التقرير","status":"not_started","updated_at":null}],"milestones":[{"id":"MS1","title":"إعداد الخطة التشغيلية والميزانية التفصيلية","target_date":"2026-02-15","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS2","title":"تأمين التمويل والموارد اللوجستية","target_date":"2026-03-15","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS3","title":"تنفيذ المبادرة الموسمية","target_date":"2026-06-30","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS4","title":"توثيق النتائج وتقييم رضا المستفيدين","target_date":"2026-07-31","phase":"إغلاق","status":"not_started","completion_date":null,"notes":""}],"indicators":[{"id":"IND1","name":"عدد المستفيدين من المبادرة الموسمية","type":"output","measurement_frequency":"موسمي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND2","name":"نسبة تحقيق المستهدف الكمي","type":"efficiency","measurement_frequency":"موسمي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND3","name":"مستوى رضا المستفيدين","type":"outcome","measurement_frequency":"موسمي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null}],"risks":[{"id":"R1","title":"فوات الموسم بسبب تأخر التحضير","probability":"medium","impact":"critical","mitigation":"بدء التحضير قبل 60 يوماً وخطة طوارئ مختصرة","status":"open","owner":"STF006"},{"id":"R2","title":"نقص الموارد اللوجستية في الموسم","probability":"medium","impact":"high","mitigation":"حجز مبكر للموارد وعقود مع موردين بدلاء","status":"open","owner":"STF006"}],"created_at":"2026-01-01T00:00:00Z","updated_at":"2026-01-01T00:00:00Z","beneficiaries":["BEN024"]},"I19":{"id":"I19","code":"I19","name":"الكفارات","description":"استقبال وتنفيذ الكفارات","category_id":"CAT3","department_id":"D2","operational_objective_id":"OP1.1","funding_type":"restricted","target_group":"عام","baseline":{"value":200,"date":"2025-12-31","unit_id":"U10"},"target":{"value":400,"unit_id":"U10"},"current_value":0,"dates":{"start":"2026-01-01","end":"2026-12-31"},"budget":{"estimated_cost":100000,"actual_revenues":0,"actual_expenses":2000,"currency":"SR"},"status":"active","responsible_staff_id":"STF006","checklist":[{"id":"CL1","title":"تعريف نطاق المبادرة واعتماد الوصف","status":"not_started","updated_at":null},{"id":"CL2","title":"تحديد المستفيدين ومعايير الاستحقاق","status":"not_started","updated_at":null},{"id":"CL3","title":"تحديد الميزانية وخطة الصرف","status":"not_started","updated_at":null},{"id":"CL4","title":"إعداد خطة التنفيذ والجدول الزمني","status":"not_started","updated_at":null},{"id":"CL5","title":"تنفيذ المرحلة الأولى وتحديث التقدم","status":"not_started","updated_at":null},{"id":"CL6","title":"توثيق الأثر وإغلاق التقرير","status":"not_started","updated_at":null}],"milestones":[{"id":"MS1","title":"إعداد الخطة التشغيلية والميزانية التفصيلية","target_date":"2026-02-15","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS2","title":"تأمين التمويل والموارد اللوجستية","target_date":"2026-03-15","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS3","title":"تنفيذ المبادرة الموسمية","target_date":"2026-06-30","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS4","title":"توثيق النتائج وتقييم رضا المستفيدين","target_date":"2026-07-31","phase":"إغلاق","status":"not_started","completion_date":null,"notes":""}],"indicators":[{"id":"IND1","name":"عدد المستفيدين من المبادرة الموسمية","type":"output","measurement_frequency":"موسمي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND2","name":"نسبة تحقيق المستهدف الكمي","type":"efficiency","measurement_frequency":"موسمي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND3","name":"مستوى رضا المستفيدين","type":"outcome","measurement_frequency":"موسمي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null}],"risks":[{"id":"R1","title":"فوات الموسم بسبب تأخر التحضير","probability":"medium","impact":"critical","mitigation":"بدء التحضير قبل 60 يوماً وخطة طوارئ مختصرة","status":"open","owner":"STF006"},{"id":"R2","title":"نقص الموارد اللوجستية في الموسم","probability":"medium","impact":"high","mitigation":"حجز مبكر للموارد وعقود مع موردين بدلاء","status":"open","owner":"STF006"}],"created_at":"2026-01-01T00:00:00Z","updated_at":"2026-01-01T00:00:00Z","beneficiaries":["BEN011","BEN034"]},"I20":{"id":"I20","code":"I20","name":"السلة الرمضانية","description":"توزيع سلال رمضانية","category_id":"CAT3","department_id":"D6","operational_objective_id":"OP5.1","funding_type":"restricted","target_group":"أسر محتاجة","baseline":{"value":250,"date":"2025-12-31","unit_id":"U6"},"target":{"value":350,"unit_id":"U6"},"current_value":0,"dates":{"start":"2026-03-01","end":"2026-03-31"},"budget":{"estimated_cost":175000,"actual_revenues":0,"actual_expenses":0,"currency":"SR"},"status":"pending","responsible_staff_id":"STF004","checklist":[{"id":"CL1","title":"تعريف نطاق المبادرة واعتماد الوصف","status":"not_started","updated_at":null},{"id":"CL2","title":"تحديد المستفيدين ومعايير الاستحقاق","status":"not_started","updated_at":null},{"id":"CL3","title":"تحديد الميزانية وخطة الصرف","status":"not_started","updated_at":null},{"id":"CL4","title":"إعداد خطة التنفيذ والجدول الزمني","status":"not_started","updated_at":null},{"id":"CL5","title":"تنفيذ المرحلة الأولى وتحديث التقدم","status":"not_started","updated_at":null},{"id":"CL6","title":"توثيق الأثر وإغلاق التقرير","status":"not_started","updated_at":null}],"milestones":[{"id":"MS1","title":"إعداد الخطة التشغيلية والميزانية التفصيلية","target_date":"2026-02-15","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS2","title":"تأمين التمويل والموارد اللوجستية","target_date":"2026-03-15","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS3","title":"تنفيذ المبادرة الموسمية","target_date":"2026-06-30","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS4","title":"توثيق النتائج وتقييم رضا المستفيدين","target_date":"2026-07-31","phase":"إغلاق","status":"not_started","completion_date":null,"notes":""}],"indicators":[{"id":"IND1","name":"عدد المستفيدين من المبادرة الموسمية","type":"output","measurement_frequency":"موسمي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND2","name":"نسبة تحقيق المستهدف الكمي","type":"efficiency","measurement_frequency":"موسمي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND3","name":"مستوى رضا المستفيدين","type":"outcome","measurement_frequency":"موسمي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null}],"risks":[{"id":"R1","title":"فوات الموسم بسبب تأخر التحضير","probability":"medium","impact":"critical","mitigation":"بدء التحضير قبل 60 يوماً وخطة طوارئ مختصرة","status":"open","owner":"STF004"},{"id":"R2","title":"نقص الموارد اللوجستية في الموسم","probability":"medium","impact":"high","mitigation":"حجز مبكر للموارد وعقود مع موردين بدلاء","status":"open","owner":"STF004"}],"created_at":"2026-01-01T00:00:00Z","updated_at":"2026-01-01T00:00:00Z","beneficiaries":["BEN020"]},"I21":{"id":"I21","code":"I21","name":"إفطار صائم","description":"تقديم وجبات إفطار في رمضان","category_id":"CAT3","department_id":"D6","operational_objective_id":"OP5.1","funding_type":"restricted","target_group":"صائمون","baseline":{"value":3000,"date":"2025-12-31","unit_id":"U7"},"target":{"value":5000,"unit_id":"U7"},"current_value":0,"dates":{"start":"2026-03-01","end":"2026-03-31"},"budget":{"estimated_cost":75000,"actual_revenues":2000,"actual_expenses":0,"currency":"SR"},"status":"pending","responsible_staff_id":"STF004","checklist":[{"id":"CL1","title":"تعريف نطاق المبادرة واعتماد الوصف","status":"not_started","updated_at":null},{"id":"CL2","title":"تحديد المستفيدين ومعايير الاستحقاق","status":"not_started","updated_at":null},{"id":"CL3","title":"تحديد الميزانية وخطة الصرف","status":"not_started","updated_at":null},{"id":"CL4","title":"إعداد خطة التنفيذ والجدول الزمني","status":"not_started","updated_at":null},{"id":"CL5","title":"تنفيذ المرحلة الأولى وتحديث التقدم","status":"not_started","updated_at":null},{"id":"CL6","title":"توثيق الأثر وإغلاق التقرير","status":"not_started","updated_at":null}],"milestones":[{"id":"MS1","title":"إعداد الخطة التشغيلية والميزانية التفصيلية","target_date":"2026-02-15","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS2","title":"تأمين التمويل والموارد اللوجستية","target_date":"2026-03-15","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS3","title":"تنفيذ المبادرة الموسمية","target_date":"2026-06-30","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS4","title":"توثيق النتائج وتقييم رضا المستفيدين","target_date":"2026-07-31","phase":"إغلاق","status":"not_started","completion_date":null,"notes":""}],"indicators":[{"id":"IND1","name":"عدد المستفيدين من المبادرة الموسمية","type":"output","measurement_frequency":"موسمي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND2","name":"نسبة تحقيق المستهدف الكمي","type":"efficiency","measurement_frequency":"موسمي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND3","name":"مستوى رضا المستفيدين","type":"outcome","measurement_frequency":"موسمي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null}],"risks":[{"id":"R1","title":"فوات الموسم بسبب تأخر التحضير","probability":"medium","impact":"critical","mitigation":"بدء التحضير قبل 60 يوماً وخطة طوارئ مختصرة","status":"open","owner":"STF004"},{"id":"R2","title":"نقص الموارد اللوجستية في الموسم","probability":"medium","impact":"high","mitigation":"حجز مبكر للموارد وعقود مع موردين بدلاء","status":"open","owner":"STF004"}],"created_at":"2026-01-01T00:00:00Z","updated_at":"2026-01-01T00:00:00Z","beneficiaries":["BEN017","BEN028"]},"I22":{"id":"I22","code":"I22","name":"الذبيحة الرمضانية","description":"توزيع لحوم في رمضان","category_id":"CAT3","department_id":"D6","operational_objective_id":"OP5.1","funding_type":"restricted","target_group":"أسر محتاجة","baseline":{"value":100,"date":"2025-12-31","unit_id":"U1"},"target":{"value":150,"unit_id":"U1"},"current_value":0,"dates":{"start":"2026-03-01","end":"2026-03-31"},"budget":{"estimated_cost":90000,"actual_revenues":0,"actual_expenses":3500,"currency":"SR"},"status":"pending","responsible_staff_id":"STF004","checklist":[{"id":"CL1","title":"تعريف نطاق المبادرة واعتماد الوصف","status":"not_started","updated_at":null},{"id":"CL2","title":"تحديد المستفيدين ومعايير الاستحقاق","status":"not_started","updated_at":null},{"id":"CL3","title":"تحديد الميزانية وخطة الصرف","status":"not_started","updated_at":null},{"id":"CL4","title":"إعداد خطة التنفيذ والجدول الزمني","status":"not_started","updated_at":null},{"id":"CL5","title":"تنفيذ المرحلة الأولى وتحديث التقدم","status":"not_started","updated_at":null},{"id":"CL6","title":"توثيق الأثر وإغلاق التقرير","status":"not_started","updated_at":null}],"milestones":[{"id":"MS1","title":"إعداد الخطة التشغيلية والميزانية التفصيلية","target_date":"2026-02-15","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS2","title":"تأمين التمويل والموارد اللوجستية","target_date":"2026-03-15","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS3","title":"تنفيذ المبادرة الموسمية","target_date":"2026-06-30","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS4","title":"توثيق النتائج وتقييم رضا المستفيدين","target_date":"2026-07-31","phase":"إغلاق","status":"not_started","completion_date":null,"notes":""}],"indicators":[{"id":"IND1","name":"عدد المستفيدين من المبادرة الموسمية","type":"output","measurement_frequency":"موسمي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND2","name":"نسبة تحقيق المستهدف الكمي","type":"efficiency","measurement_frequency":"موسمي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND3","name":"مستوى رضا المستفيدين","type":"outcome","measurement_frequency":"موسمي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null}],"risks":[{"id":"R1","title":"فوات الموسم بسبب تأخر التحضير","probability":"medium","impact":"critical","mitigation":"بدء التحضير قبل 60 يوماً وخطة طوارئ مختصرة","status":"open","owner":"STF004"},{"id":"R2","title":"نقص الموارد اللوجستية في الموسم","probability":"medium","impact":"high","mitigation":"حجز مبكر للموارد وعقود مع موردين بدلاء","status":"open","owner":"STF004"}],"created_at":"2026-01-01T00:00:00Z","updated_at":"2026-01-01T00:00:00Z","beneficiaries":[]},"I23":{"id":"I23","code":"I23","name":"زكاة الفطر","description":"جمع وتوزيع زكاة الفطر","category_id":"CAT3","department_id":"D2","operational_objective_id":"OP1.1","funding_type":"restricted","target_group":"مستحقي الزكاة","baseline":{"value":200000,"date":"2025-12-31","unit_id":"U12"},"target":{"value":300000,"unit_id":"U12"},"current_value":0,"dates":{"start":"2026-03-25","end":"2026-04-05"},"budget":{"estimated_cost":200000,"actual_revenues":0,"actual_expenses":0,"currency":"SR","budget_note":"زكاة الفطر — موسمية رمضان، تقدير بناءً على عدد الأسر المستهدفة × متوسط زكاة الفطر"},"status":"pending","responsible_staff_id":"STF006","checklist":[{"id":"CL1","title":"تعريف نطاق المبادرة واعتماد الوصف","status":"not_started","updated_at":null},{"id":"CL2","title":"تحديد المستفيدين ومعايير الاستحقاق","status":"not_started","updated_at":null},{"id":"CL3","title":"تحديد الميزانية وخطة الصرف","status":"not_started","updated_at":null},{"id":"CL4","title":"إعداد خطة التنفيذ والجدول الزمني","status":"not_started","updated_at":null},{"id":"CL5","title":"تنفيذ المرحلة الأولى وتحديث التقدم","status":"not_started","updated_at":null},{"id":"CL6","title":"توثيق الأثر وإغلاق التقرير","status":"not_started","updated_at":null}],"milestones":[{"id":"MS1","title":"إعداد الخطة التشغيلية والميزانية التفصيلية","target_date":"2026-02-15","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS2","title":"تأمين التمويل والموارد اللوجستية","target_date":"2026-03-15","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS3","title":"تنفيذ المبادرة الموسمية","target_date":"2026-06-30","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS4","title":"توثيق النتائج وتقييم رضا المستفيدين","target_date":"2026-07-31","phase":"إغلاق","status":"not_started","completion_date":null,"notes":""}],"indicators":[{"id":"IND1","name":"عدد المستفيدين من المبادرة الموسمية","type":"output","measurement_frequency":"موسمي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND2","name":"نسبة تحقيق المستهدف الكمي","type":"efficiency","measurement_frequency":"موسمي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND3","name":"مستوى رضا المستفيدين","type":"outcome","measurement_frequency":"موسمي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null}],"risks":[{"id":"R1","title":"فوات الموسم بسبب تأخر التحضير","probability":"medium","impact":"critical","mitigation":"بدء التحضير قبل 60 يوماً وخطة طوارئ مختصرة","status":"open","owner":"STF006"},{"id":"R2","title":"نقص الموارد اللوجستية في الموسم","probability":"medium","impact":"high","mitigation":"حجز مبكر للموارد وعقود مع موردين بدلاء","status":"open","owner":"STF006"}],"created_at":"2026-01-01T00:00:00Z","updated_at":"2026-01-01T00:00:00Z","beneficiaries":[]},"I24":{"id":"I24","code":"I24","name":"كسوة العيد","description":"توزيع ملابس العيد","category_id":"CAT3","department_id":"D6","operational_objective_id":"OP5.1","funding_type":"restricted","target_group":"أطفال الأسر المحتاجة","baseline":{"value":200,"date":"2025-12-31","unit_id":"U2"},"target":{"value":350,"unit_id":"U2"},"current_value":0,"dates":{"start":"2026-03-20","end":"2026-04-05"},"budget":{"estimated_cost":70000,"actual_revenues":0,"actual_expenses":0,"currency":"SR"},"status":"pending","responsible_staff_id":"STF004","checklist":[{"id":"CL1","title":"تعريف نطاق المبادرة واعتماد الوصف","status":"not_started","updated_at":null},{"id":"CL2","title":"تحديد المستفيدين ومعايير الاستحقاق","status":"not_started","updated_at":null},{"id":"CL3","title":"تحديد الميزانية وخطة الصرف","status":"not_started","updated_at":null},{"id":"CL4","title":"إعداد خطة التنفيذ والجدول الزمني","status":"not_started","updated_at":null},{"id":"CL5","title":"تنفيذ المرحلة الأولى وتحديث التقدم","status":"not_started","updated_at":null},{"id":"CL6","title":"توثيق الأثر وإغلاق التقرير","status":"not_started","updated_at":null}],"milestones":[{"id":"MS1","title":"إعداد الخطة التشغيلية والميزانية التفصيلية","target_date":"2026-02-15","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS2","title":"تأمين التمويل والموارد اللوجستية","target_date":"2026-03-15","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS3","title":"تنفيذ المبادرة الموسمية","target_date":"2026-06-30","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS4","title":"توثيق النتائج وتقييم رضا المستفيدين","target_date":"2026-07-31","phase":"إغلاق","status":"not_started","completion_date":null,"notes":""}],"indicators":[{"id":"IND1","name":"عدد المستفيدين من المبادرة الموسمية","type":"output","measurement_frequency":"موسمي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND2","name":"نسبة تحقيق المستهدف الكمي","type":"efficiency","measurement_frequency":"موسمي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND3","name":"مستوى رضا المستفيدين","type":"outcome","measurement_frequency":"موسمي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null}],"risks":[{"id":"R1","title":"فوات الموسم بسبب تأخر التحضير","probability":"medium","impact":"critical","mitigation":"بدء التحضير قبل 60 يوماً وخطة طوارئ مختصرة","status":"open","owner":"STF004"},{"id":"R2","title":"نقص الموارد اللوجستية في الموسم","probability":"medium","impact":"high","mitigation":"حجز مبكر للموارد وعقود مع موردين بدلاء","status":"open","owner":"STF004"}],"created_at":"2026-01-01T00:00:00Z","updated_at":"2026-01-01T00:00:00Z","beneficiaries":["BEN018","BEN020","BEN027"]},"I25":{"id":"I25","code":"I25","name":"صدقة عشر ذي الحجة","description":"حملة تبرعات في العشر من ذي الحجة","category_id":"CAT3","department_id":"D4","operational_objective_id":"OP1.2","funding_type":"unrestricted","target_group":"عام","baseline":{"value":100000,"date":"2025-12-31","unit_id":"U12"},"target":{"value":200000,"unit_id":"U12"},"current_value":0,"dates":{"start":"2026-06-01","end":"2026-06-10"},"budget":{"estimated_cost":80000,"actual_revenues":2500,"actual_expenses":500,"currency":"SR","budget_note":"صدقة عشر ذي الحجة — موسمية، تقدير بناءً على حملات السنوات السابقة"},"status":"pending","responsible_staff_id":"STF003","checklist":[{"id":"CL1","title":"تعريف نطاق المبادرة واعتماد الوصف","status":"not_started","updated_at":null},{"id":"CL2","title":"تحديد المستفيدين ومعايير الاستحقاق","status":"not_started","updated_at":null},{"id":"CL3","title":"تحديد الميزانية وخطة الصرف","status":"not_started","updated_at":null},{"id":"CL4","title":"إعداد خطة التنفيذ والجدول الزمني","status":"not_started","updated_at":null},{"id":"CL5","title":"تنفيذ المرحلة الأولى وتحديث التقدم","status":"not_started","updated_at":null},{"id":"CL6","title":"توثيق الأثر وإغلاق التقرير","status":"not_started","updated_at":null}],"milestones":[{"id":"MS1","title":"إعداد الخطة التشغيلية والميزانية التفصيلية","target_date":"2026-02-15","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS2","title":"تأمين التمويل والموارد اللوجستية","target_date":"2026-03-15","phase":"تخطيط","status":"not_started","completion_date":null,"notes":""},{"id":"MS3","title":"تنفيذ المبادرة الموسمية","target_date":"2026-06-30","phase":"تنفيذ","status":"not_started","completion_date":null,"notes":""},{"id":"MS4","title":"توثيق النتائج وتقييم رضا المستفيدين","target_date":"2026-07-31","phase":"إغلاق","status":"not_started","completion_date":null,"notes":""}],"indicators":[{"id":"IND1","name":"عدد المستفيدين من المبادرة الموسمية","type":"output","measurement_frequency":"موسمي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND2","name":"نسبة تحقيق المستهدف الكمي","type":"efficiency","measurement_frequency":"موسمي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null},{"id":"IND3","name":"مستوى رضا المستفيدين","type":"outcome","measurement_frequency":"موسمي","baseline":0,"target":0,"current":0,"unit":"عدد","data_source":"نظام فريد","last_measured":null}],"risks":[{"id":"R1","title":"فوات الموسم بسبب تأخر التحضير","probability":"medium","impact":"critical","mitigation":"بدء التحضير قبل 60 يوماً وخطة طوارئ مختصرة","status":"open","owner":"STF003"},{"id":"R2","title":"نقص الموارد اللوجستية في الموسم","probability":"medium","impact":"high","mitigation":"حجز مبكر للموارد وعقود مع موردين بدلاء","status":"open","owner":"STF003"}],"created_at":"2026-01-01T00:00:00Z","updated_at":"2026-01-01T00:00:00Z","beneficiaries":["BEN004","BEN010"]}},"event_specs":{"initiative_created":{"description":"إنشاء مبادرة جديدة","required_fields":["initiative_id","name","category_id","department_id","operational_objective_id"],"allowed_roles":["system_admin","data_entry"],"creates_log":true},"initiative_updated":{"description":"تحديث بيانات مبادرة","required_fields":["initiative_id","updated_fields"],"allowed_roles":["system_admin","data_entry"],"scope_check":true,"creates_log":true},"revenue_added":{"description":"إضافة إيراد","required_fields":["amount","date","source","initiative_id_or_general"],"allowed_roles":["system_admin","data_entry"],"excludes_roles":["deduction_officer"],"creates_log":true},"expense_added":{"description":"إضافة مصروف","required_fields":["amount","date","initiative_id","payment_method"],"allowed_roles":["system_admin","data_entry"],"creates_log":true},"deduction_added":{"description":"إضافة استقطاع","required_fields":["subscriber_id","amount","date","initiative_id_or_general"],"allowed_roles":["deduction_officer","system_admin"],"creates_log":true},"deduction_reminder_sent":{"description":"إرسال تذكير للمتعثر","required_fields":["subscriber_id","method","message"],"allowed_roles":["deduction_officer","system_admin"],"creates_log":true},"deduction_appreciation_sent":{"description":"إرسال شكر للملتزم","required_fields":["subscriber_id","method","message"],"allowed_roles":["deduction_officer","system_admin"],"creates_log":true},"whatsapp_log_created":{"description":"تسجيل تواصل واتساب","required_fields":["contact_id","message_template","purpose"],"allowed_roles":["system_admin","data_entry","deduction_officer"],"creates_log":true},"task_created":{"description":"إنشاء مهمة","required_fields":["assigned_to","title","due_date"],"allowed_roles":["system_admin","general_manager","data_entry"],"creates_log":true},"task_completed":{"description":"إكمال مهمة","required_fields":["task_id","completion_date"],"allowed_roles":["system_admin","data_entry"],"scope_check":true,"creates_log":true},"checklist_item_toggled":{"description":"تغيير حالة عنصر تشيك ليست","required_fields":["initiative_id","item_id","new_status"],"allowed_roles":["system_admin","data_entry"],"scope_check":true,"creates_log":true},"inventory_item_dispensed":{"description":"صرف عنصر من المخزون","required_fields":["item_id","quantity","initiative_id"],"allowed_roles":["system_admin","data_entry"],"creates_log":true,"validates":"inventory_availability"},"year_closed":{"description":"إقفال السنة","required_fields":["fiscal_year","closing_notes"],"allowed_roles":["system_admin"],"creates_log":true,"irreversible":true},"self_test_run":{"description":"تشغيل اختبار ذاتي","required_fields":[],"allowed_roles":["system_admin"],"creates_log":true}}};
+
+const fmtMoney = (n) => {
+  if (n === null || n === undefined) return "—";
+  try { return Number(n).toLocaleString('ar-SA') + " " + (SSOT.ui_config?.currency?.default || "SR"); }
+  catch(e){ return String(n) + " SR"; }
+};
+const safe = (v)=> (v===null||v===undefined||v==="") ? "—" : v;
+
+function initHeader(){
+  const si = SSOT.system_info || {};
+  document.getElementById('sysName').textContent = (si.name || "النظام") + " — معاينة أوفلاين";
+  document.getElementById('sysOrg').textContent =
+    (si.organization || "") +
+    (si.license ? (" • ترخيص " + si.license) : "") +
+    (si.fiscal_year?.year ? (" • سنة " + si.fiscal_year.year) : "");
+}
+
+function setActive(route){
+  document.querySelectorAll('#nav a[data-route]').forEach(a=>{
+    a.classList.toggle('active', a.dataset.route===route);
+  });
+}
+
+function route(){
+  const hash = location.hash || "#/overview";
+  const routeName = hash.replace("#/","").split("?")[0];
+  setActive(routeName);
+  const view = document.getElementById('view');
+  const q = new URLSearchParams(hash.split("?")[1]||"");
+  const query = (q.get("q")||"").trim();
+  if(routeName==="overview") view.innerHTML = renderOverview();
+  else if(routeName==="strategy") view.innerHTML = renderStrategy();
+  else if(routeName==="initiatives") view.innerHTML = renderInitiatives(query);
+  else if(routeName==="timeline") view.innerHTML = renderTimeline();
+  else if(routeName==="inventory") view.innerHTML = renderInventory();
+  else if(routeName==="donors") view.innerHTML = renderDonors();
+  else if(routeName==="deductions") view.innerHTML = renderDeductions();
+  else if(routeName==="trainees") view.innerHTML = renderTrainees();
+  else if(routeName==="expenses") view.innerHTML = renderExpenses();
+  else if(routeName==="activity") view.innerHTML = renderActivity();
+  else if(routeName==="rbac") view.innerHTML = renderRBAC();
+  else if(routeName==="settings") view.innerHTML = renderSettings();
+  else view.innerHTML = renderOverview();
+  wireInitiativeButtons();
+}
+
+function kpiCard(title, value, badge){
+  return `
+    <div class="card">
+      <h3>${title}</h3>
+      <div class="kpi">
+        <div>
+          <div class="val">${value}</div>
+          <div class="lbl">آخر تحديث: ${safe(SSOT.system_info?.last_updated)}</div>
+        </div>
+        <div>${badge||""}</div>
+      </div>
+    </div>`;
+}
+
+function renderOverview(){
+  const initiatives = Object.values(SSOT.initiatives||{});
+  const active = initiatives.filter(i=>i.status==="active").length;
+  const total = initiatives.length;
+  const est = initiatives.reduce((s,i)=>s+(i.budget?.estimated_cost||0),0);
+  const actExp = initiatives.reduce((s,i)=>s+(i.budget?.actual_expenses||0),0);
+  const actRev = initiatives.reduce((s,i)=>s+(i.budget?.actual_revenues||0),0);
+  const coverage = est ? Math.round((actRev/est)*100) : 0;
+  const burn = est ? Math.round((actExp/est)*100) : 0;
+
+  return `
+    <div class="row">
+      <div>
+        <div class="badge ok">✅ وضع أوفلاين • نموذج معاينة</div>
+        <div style="margin-top:8px; font-size:20px; font-weight:900">لوحة التحكم</div>
+        <div class="small">ملخص سريع للمبادرات والميزانيات والمؤشرات (بيانات عينة من SSOT).</div>
+      </div>
+      <div class="btns">
+        <button class="btn" onclick="location.hash='#/initiatives'">استعراض المبادرات</button>
+        <button class="btn ghost" onclick="openSSOT()">عرض SSOT (مختصر)</button>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="grid cols-3">
+      ${kpiCard("عدد المبادرات", `<span style="font-family:var(--mono)">${total}</span>`, `<span class="badge ok">نشطة: ${active}</span>`)}
+      ${kpiCard("التكلفة التقديرية", fmtMoney(est), `<span class="badge warn">حرق: ${burn}%</span>`)}
+      ${kpiCard("الإيرادات الفعلية المسجلة", fmtMoney(actRev), `<span class="badge ok">تغطية: ${coverage}%</span>`)}
+    </div>
+
+    <div class="grid cols-2" style="margin-top:12px">
+      <div class="card">
+        <h3>أحدث المبادرات</h3>
+        ${renderInitiativesTable(initiatives.slice(0,8))}
+      </div>
+      <div class="card">
+        <h3>قيم وهوية الجمعية</h3>
+        <div class="chips">
+          ${(SSOT.identity?.values||[]).map(v=>`<span class="chip">${v.icon||"•"} ${v.name}</span>`).join("")}
+        </div>
+        <div class="hr"></div>
+        <div class="small"><b>الرؤية:</b> ${safe(SSOT.identity?.vision)}</div>
+        <div class="small" style="margin-top:8px"><b>الرسالة:</b> ${safe(SSOT.identity?.mission)}</div>
+      </div>
+    </div>
+  `;
+}
+
+function renderStrategy(){
+  const p = SSOT.lookups?.perspectives || [];
+  const so = SSOT.lookups?.strategic_objectives || [];
+  const op = SSOT.lookups?.operational_objectives || [];
+  const initiatives = Object.values(SSOT.initiatives||{});
+
+  const soByP = Object.fromEntries(p.map(x=>[x.id, so.filter(s=>s.perspective_id===x.id)]));
+  const opBySO = Object.fromEntries(so.map(s=>[s.id, op.filter(o=>o.so_id===s.id)]));
+
+  const countInits = (opId)=> initiatives.filter(i=>i.operational_objective_id===opId).length;
+
+  return `
+    <div class="row">
+      <div>
+        <div style="font-size:20px; font-weight:900">الخطة الاستراتيجية</div>
+        <div class="small">عرض مترابط (BSC) من المنظور -> الأهداف الاستراتيجية -> الأهداف التشغيلية -> عدد المبادرات المرتبطة.</div>
+      </div>
+      <div class="btns">
+        <button class="btn ghost" onclick="location.hash='#/initiatives'">فتح المبادرات</button>
+      </div>
+    </div>
+    <div class="hr"></div>
+    <div class="grid">
+      ${p.map(pp=>`
+        <div class="card">
+          <div class="row">
+            <div style="font-weight:900">${pp.icon||"📍"} ${pp.name}</div>
+            <span class="badge">${pp.code}</span>
+          </div>
+          <div class="hr"></div>
+          ${(soByP[pp.id]||[]).map(s=>`
+            <div class="card" style="background:rgba(17,27,46,.35)">
+              <div class="row">
+                <div style="font-weight:850">${s.code} — ${s.name}</div>
+                <span class="badge">أهداف تشغيلية: ${(opBySO[s.id]||[]).length}</span>
+              </div>
+              <div class="hr"></div>
+              <table class="table">
+                <thead><tr><th>الهدف التشغيلي</th><th>عدد المبادرات</th><th></th></tr></thead>
+                <tbody>
+                  ${(opBySO[s.id]||[]).map(o=>`
+                    <tr>
+                      <td>${o.code} — ${o.name}</td>
+                      <td><span class="badge ok">${countInits(o.id)}</span></td>
+                      <td><button class="btn ghost" onclick="location.hash='#/initiatives?q='+encodeURIComponent(o.code)">عرض</button></td>
+                    </tr>
+                  `).join("")}
+                </tbody>
+              </table>
+            </div>
+          `).join("")}
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+function renderInitiatives(query=""){
+  const list = Object.values(SSOT.initiatives||{});
+  const q = query.toLowerCase();
+  const filtered = q ? list.filter(i=>[i.id,i.code,i.name,i.description,i.department_id,i.operational_objective_id,i.category_id].some(x=>String(x||"").toLowerCase().includes(q))) : list;
+  const depLookup = Object.fromEntries((SSOT.lookups?.departments||[]).map(d=>[d.id, d.name]));
+  const catLookup = Object.fromEntries((SSOT.lookups?.initiative_categories||[]).map(c=>[c.id, c.name]));
+  return `
+    <div class="row">
+      <div>
+        <div style="font-size:20px; font-weight:900">المبادرات</div>
+        <div class="small">اضغط على "مبادرة 360" لفتح نافذة منبثقة شاملة.</div>
+      </div>
+      <div class="btns">
+        <span class="badge">نتائج: ${filtered.length}</span>
+        <button class="btn ghost" onclick="location.hash='#/initiatives'">إزالة الفلتر</button>
+      </div>
+    </div>
+    <div class="hr"></div>
+    <div class="card">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>المبادرة</th>
+            <th>الإدارة</th>
+            <th>التصنيف</th>
+            <th>التكلفة التقديرية</th>
+            <th>فعلي (دخل/صرف)</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          ${filtered.map(i=>`
+            <tr>
+              <td><b>${i.code}</b> — ${i.name}<div class="small">${safe(i.description)}</div></td>
+              <td>${safe(depLookup[i.department_id] || i.department_id)}</td>
+              <td>${safe(catLookup[i.category_id] || i.category_id)}</td>
+              <td><span class="badge warn">${fmtMoney(i.budget?.estimated_cost||0)}</span></td>
+              <td>
+                <span class="badge ok">دخل: ${fmtMoney(i.budget?.actual_revenues||0)}</span>
+                <span class="badge bad">صرف: ${fmtMoney(i.budget?.actual_expenses||0)}</span>
+              </td>
+              <td style="white-space:nowrap">
+                <button class="btn" data-init360="${i.id}">مبادرة 360</button>
+              </td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+function renderInitiativesTable(list){
+  const depLookup = Object.fromEntries((SSOT.lookups?.departments||[]).map(d=>[d.id, d.name]));
+  return `
+    <table class="table">
+      <thead><tr><th>المبادرة</th><th>الإدارة</th><th>التقديري</th><th></th></tr></thead>
+      <tbody>
+        ${list.map(i=>`
+          <tr>
+            <td><b>${i.code}</b> — ${i.name}</td>
+            <td>${safe(depLookup[i.department_id] || i.department_id)}</td>
+            <td>${fmtMoney(i.budget?.estimated_cost||0)}</td>
+            <td><button class="btn ghost" data-init360="${i.id}">360</button></td>
+          </tr>
+        `).join("")}
+      </tbody>
+    </table>`;
+}
+
+function renderTimeline(){
+  const initiatives = Object.values(SSOT.initiatives||{});
+  const rows = [];
+  initiatives.forEach(i=>{
+    (i.milestones||[]).forEach(m=>{
+      rows.push({
+        initiative_id: i.id,
+        initiative: i.code + " — " + i.name,
+        title: m.title,
+        target: m.target_date,
+        status: m.status,
+        phase: m.phase
+      });
+    });
+  });
+  const statusBadge = (s)=>{
+    if(s==="completed") return '<span class="badge ok">مكتمل</span>';
+    if(s==="in_progress") return '<span class="badge warn">قيد التنفيذ</span>';
+    return '<span class="badge">لم يبدأ</span>';
+  };
+  return `
+    <div class="row">
+      <div>
+        <div style="font-size:20px; font-weight:900">الجدول الزمني</div>
+        <div class="small">معالم المبادرات (Milestones) كبديل مبسط للـ Gantt في المعاينة الأوفلاين.</div>
+      </div>
+      <div class="btns">
+        <span class="badge">عدد المعالم: ${rows.length}</span>
+      </div>
+    </div>
+    <div class="hr"></div>
+    <div class="card">
+      <table class="table">
+        <thead><tr><th>المبادرة</th><th>المعلم</th><th>المرحلة</th><th>تاريخ مستهدف</th><th>الحالة</th><th></th></tr></thead>
+        <tbody>
+          ${rows.slice(0,200).map(r=>`
+            <tr>
+              <td>${r.initiative}</td>
+              <td>${r.title}</td>
+              <td><span class="badge">${safe(r.phase)}</span></td>
+              <td style="font-family:var(--mono)">${safe(r.target)}</td>
+              <td>${statusBadge(r.status)}</td>
+              <td><button class="btn ghost" data-init360="${r.initiative_id}">مبادرة 360</button></td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+      <div class="small" style="margin-top:10px">* تم عرض أول 200 معلم فقط لتبقى المعاينة سريعة.</div>
+    </div>
+  `;
+}
+
+function renderInventory(){
+  return `
+    <div class="row">
+      <div>
+        <div style="font-size:20px; font-weight:900">المخزون</div>
+        <div class="small">هذه شاشة معاينة. الربط الحقيقي بالمخزون سيتم عبر قاعدة البيانات وحركات الصرف.</div>
+      </div>
+      <div class="btns">
+        <span class="badge warn">قيد التطوير</span>
+      </div>
+    </div>
+    <div class="hr"></div>
+    <div class="grid cols-2">
+      <div class="card">
+        <h3>صرف مخزون لمبادرة</h3>
+        <div class="small">اختر مبادرة ثم سجّل حركة صرف (عرض تجريبي).</div>
+        <div class="hr"></div>
+        <div class="btns">
+          <button class="btn" onclick="location.hash='#/initiatives'">اختر مبادرة</button>
+          <button class="btn ghost" onclick="toast('هذه معاينة أوفلاين — لا يتم حفظ عمليات حقيقية')">تسجيل صرف (تجريبي)</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3>سجل الحركات</h3>
+        <div class="small">سيظهر هنا: استلام/صرف/إرجاع/تسوية مع مرفقات واعتمادات.</div>
+        <pre class="code">inventory_txns: (txn_id, item_id, qty, direction, initiative_id, actor_id, created_at)</pre>
+      </div>
+    </div>
+  `;
+}
+
+function renderDonors(){
+  return `
+    <div class="row">
+      <div>
+        <div style="font-size:20px; font-weight:900">الجهات المانحة</div>
+        <div class="small">المعاينة تعرض نمط البيانات المتوقع (ربط مانح ↔ مبادرة ↔ تعهد/معاملة).</div>
+      </div>
+      <div class="btns"><span class="badge warn">قيد التطوير</span></div>
+    </div>
+    <div class="hr"></div>
+    <div class="card">
+      <h3>نموذج بيانات (Donor)</h3>
+      <pre class="code">donors: (id, name, contact, funding_type, notes, created_at)</pre>
+      <div class="hr"></div>
+      <h3>ربط مانح بمبادرة</h3>
+      <pre class="code">initiative_donors: (id, initiative_id, donor_id, pledge_amount, pledge_date, status)</pre>
+    </div>
+  `;
+}
+
+function renderDeductions(){
+  return `
+    <div class="row">
+      <div>
+        <div style="font-size:20px; font-weight:900">المستقطعين</div>
+        <div class="small">مخصص لموظف الاستقطاع مع تذكير/شكر (واتساب) وفق event_specs.</div>
+      </div>
+      <div class="btns"><span class="badge ok">يدعم صلاحيات مخصصة</span></div>
+    </div>
+    <div class="hr"></div>
+    <div class="card">
+      <h3>أحداث مرتبطة</h3>
+      <pre class="code">deduction_added, deduction_reminder_sent, deduction_appreciation_sent, whatsapp_log_created</pre>
+      <div class="hr"></div>
+      <div class="btns">
+        <button class="btn ghost" onclick="toast('تذكير واتساب (تجريبي)')">إرسال تذكير</button>
+        <button class="btn ghost" onclick="toast('شكر واتساب (تجريبي)')">إرسال شكر</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderTrainees(){
+  return `
+    <div class="row">
+      <div>
+        <div style="font-size:20px; font-weight:900">المتدربون</div>
+        <div class="small">شاشة متابعة: تعيين متدرب لمبادرة/إدارة + حضور + تقييم.</div>
+      </div>
+      <div class="btns"><span class="badge warn">قيد التطوير</span></div>
+    </div>
+    <div class="hr"></div>
+    <div class="grid cols-2">
+      <div class="card">
+        <h3>نموذج سجل متدرب</h3>
+        <pre class="code">trainees: (id, name, start_date, end_date, department_id, supervisor_id, status)</pre>
+      </div>
+      <div class="card">
+        <h3>ربط المتدرب بالمبادرة</h3>
+        <pre class="code">trainee_assignments: (id, trainee_id, initiative_id, role, hours_planned, hours_done)</pre>
+      </div>
+    </div>
+  `;
+}
+
+function renderExpenses(){
+  return `
+    <div class="row">
+      <div>
+        <div style="font-size:20px; font-weight:900">المصروفات التشغيلية</div>
+        <div class="small">سجل مصروفات للمبادرات (ليس محاسبة). يعرض: مبلغ/تاريخ/طريقة دفع/مرفقات.</div>
+      </div>
+      <div class="btns"><span class="badge ok">متابعة فقط</span></div>
+    </div>
+    <div class="hr"></div>
+    <div class="card">
+      <h3>نموذج المصروف التشغيلي</h3>
+      <pre class="code">initiative_expenses: (id, initiative_id, amount, date, payment_method, category, description, attachments[])</pre>
+      <div class="hr"></div>
+      <div class="small">طرق الدفع (من lookups): ${(SSOT.lookups?.payment_methods||[]).map(p=>p.name).slice(0,6).join(" • ")} ...</div>
+    </div>
+  `;
+}
+
+function renderActivity(){
+  const specs = SSOT.event_specs || {};
+  const items = Object.entries(specs).slice(0,20).map(([k,v])=>({k, ...v}));
+  return `
+    <div class="row">
+      <div>
+        <div style="font-size:20px; font-weight:900">سجل النشاط</div>
+        <div class="small">هذه قائمة “مواصفات الأحداث” من SSOT (كنموذج لسجل الأحداث الفعلي في قاعدة البيانات).</div>
+      </div>
+      <div class="btns"><span class="badge">Event Specs: ${Object.keys(specs).length}</span></div>
+    </div>
+    <div class="hr"></div>
+    <div class="card">
+      <table class="table">
+        <thead><tr><th>الحدث</th><th>الوصف</th><th>الأدوار المسموحة</th><th>يسجل Log</th></tr></thead>
+        <tbody>
+          ${items.map(e=>`
+            <tr>
+              <td style="font-family:var(--mono)">${e.k}</td>
+              <td>${safe(e.description)}</td>
+              <td>${(e.allowed_roles||[]).map(r=>`<span class="chip">${r}</span>`).join(" ")}</td>
+              <td>${e.creates_log ? '<span class="badge ok">نعم</span>' : '<span class="badge">—</span>'}</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+      <div class="small" style="margin-top:10px">* معاينة — السجل الحقيقي سيأتي من جدول events في قاعدة البيانات.</div>
+    </div>
+  `;
+}
+
+function renderRBAC(){
+  const roles = SSOT.rbac?.roles || {};
+  const page = SSOT.rbac?.page_access || {};
+  return `
+    <div class="row">
+      <div>
+        <div style="font-size:20px; font-weight:900">الصلاحيات (RBAC)</div>
+        <div class="small">مقتبس من SSOT: roles.permissions + page_access.</div>
+      </div>
+      <div class="btns"><span class="badge ok">سياسة Visibility مدعومة</span></div>
+    </div>
+    <div class="hr"></div>
+
+    <div class="grid cols-2">
+      <div class="card">
+        <h3>الأدوار</h3>
+        <table class="table">
+          <thead><tr><th>Role</th><th>الاسم</th><th>Scope</th></tr></thead>
+          <tbody>
+            ${Object.entries(roles).map(([key,r])=>`
+              <tr>
+                <td style="font-family:var(--mono)">${key}</td>
+                <td>${safe(r.name)}</td>
+                <td><span class="badge">${safe(r.scope)}</span></td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>الوصول للصفحات</h3>
+        <table class="table">
+          <thead><tr><th>Page</th><th>الأدوار</th></tr></thead>
+          <tbody>
+            ${Object.entries(page).slice(0,25).map(([p,rs])=>`
+              <tr>
+                <td style="font-family:var(--mono)">${p}</td>
+                <td>${(rs||[]).map(x=>`<span class="chip">${x}</span>`).join(" ")}</td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
+}
+
+function renderSettings(){
+  const ui = SSOT.ui_config || {};
+  const pol = SSOT.policies || {};
+  return `
+    <div class="row">
+      <div>
+        <div style="font-size:20px; font-weight:900">الإعدادات</div>
+        <div class="small">معاينة لسياسات اللغة/العملة/عرض التبويبات.</div>
+      </div>
+      <div class="btns">
+        <button class="btn ghost" onclick="openSSOT()">عرض SSOT (مختصر)</button>
+      </div>
+    </div>
+    <div class="hr"></div>
+
+    <div class="grid cols-2">
+      <div class="card">
+        <h3>العملة</h3>
+        <div class="small">افتراضي: <b>${safe(ui.currency?.default)}</b> • موضع الرمز: ${safe(ui.currency?.symbol_position)}</div>
+        <div class="hr"></div>
+        <div class="small">المتاح: ${(ui.currency?.available||[]).map(c=>c.code).join(" • ")}</div>
+      </div>
+      <div class="card">
+        <h3>التبويبات</h3>
+        <table class="table">
+          <thead><tr><th>Tab</th><th>مفعل</th><th>Roles</th></tr></thead>
+          <tbody>
+            ${(ui.tabs||[]).map(t=>`
+              <tr>
+                <td>${t.name}</td>
+                <td>${t.enabled ? '<span class="badge ok">نعم</span>' : '<span class="badge">لا</span>'}</td>
+                <td>${(t.roles||[]).map(r=>`<span class="chip">${r}</span>`).join(" ")}</td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h3>سياسات البيانات</h3>
+        <pre class="code">${JSON.stringify(pol.data_governance||{}, null, 2)}</pre>
+      </div>
+      <div class="card">
+        <h3>سياسة إظهار المبادرات</h3>
+        <pre class="code">${JSON.stringify(pol.initiative_visibility||{}, null, 2)}</pre>
+      </div>
+    </div>
+  `;
+}
+
+function wireInitiativeButtons(){
+  document.querySelectorAll('[data-init360]').forEach(btn=>{
+    btn.addEventListener('click', ()=> openInitiative360(btn.dataset.init360));
+  });
+}
+
+function openInitiative360(id){
+  const i = SSOT.initiatives?.[id];
+  if(!i) return toast("لا توجد مبادرة بهذا المعرف");
+  const depLookup = Object.fromEntries((SSOT.lookups?.departments||[]).map(d=>[d.id, d.name]));
+  const opList = SSOT.lookups?.operational_objectives||[];
+  const soList = SSOT.lookups?.strategic_objectives||[];
+  const pList = SSOT.lookups?.perspectives||[];
+  const op = opList.find(o=>o.id===i.operational_objective_id);
+  const so = op ? soList.find(s=>s.id===op.so_id) : null;
+  const per = so ? pList.find(p=>p.id===so.perspective_id) : null;
+
+  document.getElementById('mTitle').textContent = `${i.code} — ${i.name}`;
+  document.getElementById('mSub').textContent = `${safe(depLookup[i.department_id]||i.department_id)} • ${safe(op?.code)} ${safe(op?.name)}`;
+  document.getElementById('mChips').innerHTML = `
+    <span class="chip">الحالة: ${safe(i.status)}</span>
+    <span class="chip">التصنيف: ${safe(i.category_id)}</span>
+    <span class="chip">التمويل: ${safe(i.funding_type)}</span>
+    <span class="chip">الفترة: ${safe(i.dates?.start)} → ${safe(i.dates?.end)}</span>
+  `;
+
+  const tabs = [
+    {id:"summary", name:"ملخص"},
+    {id:"strategy", name:"ربط استراتيجي"},
+    {id:"budget", name:"ميزانية"},
+    {id:"milestones", name:"معالم"},
+    {id:"indicators", name:"مؤشرات"},
+    {id:"risks", name:"مخاطر"},
+    {id:"checklist", name:"تشيك ليست"},
+    {id:"people", name:"المسؤول"},
+    {id:"raw", name:"بيانات خام"}
+  ];
+  const tabsEl = document.getElementById('mTabs');
+  tabsEl.innerHTML = tabs.map((t,idx)=>`<div class="tab ${idx===0?'active':''}" data-tab="${t.id}">${t.name}</div>`).join("");
+
+  const renderTab = (tabId)=>{
+    const body = document.getElementById('mBody');
+    if(tabId==="summary"){
+      body.innerHTML = `
+        <div class="grid cols-3">
+          ${kpiCard("التقديري", fmtMoney(i.budget?.estimated_cost||0), `<span class="badge warn">تقديري</span>`)}
+          ${kpiCard("الإيراد الفعلي", fmtMoney(i.budget?.actual_revenues||0), `<span class="badge ok">مسجل</span>`)}
+          ${kpiCard("الصرف الفعلي", fmtMoney(i.budget?.actual_expenses||0), `<span class="badge bad">مسجل</span>`)}
+        </div>
+        <div class="hr"></div>
+        <div class="card">
+          <h3>الوصف</h3>
+          <div>${safe(i.description)}</div>
+          <div class="hr"></div>
+          <div class="small"><b>الفئة المستهدفة:</b> ${safe(i.target_group)}</div>
+          <div class="small" style="margin-top:8px"><b>الخط الأساس:</b> ${safe(i.baseline?.value)} ${safe(i.baseline?.unit_id)} • تاريخ ${safe(i.baseline?.date)}</div>
+          <div class="small" style="margin-top:8px"><b>المستهدف:</b> ${safe(i.target?.value)} ${safe(i.target?.unit_id)}</div>
+        </div>
+      `;
+    } else if(tabId==="strategy"){
+      body.innerHTML = `
+        <div class="card">
+          <h3>مسار الربط</h3>
+          <div class="chips">
+            <span class="chip">${safe(per?.icon)} ${safe(per?.name)}</span>
+            <span class="chip">${safe(so?.code)} ${safe(so?.name)}</span>
+            <span class="chip">${safe(op?.code)} ${safe(op?.name)}</span>
+            <span class="chip">مبادرة: ${i.code}</span>
+          </div>
+        </div>
+      `;
+    } else if(tabId==="budget"){
+      const est = i.budget?.estimated_cost||0;
+      const exp = i.budget?.actual_expenses||0;
+      const pct = est? Math.round((exp/est)*100):0;
+      const cls = pct>=100 ? "bad" : (pct>=70 ? "warn" : "ok");
+      body.innerHTML = `
+        <div class="grid cols-2">
+          <div class="card">
+            <h3>الميزانية</h3>
+            <div class="small"><b>تقديري:</b> ${fmtMoney(est)}</div>
+            <div class="small" style="margin-top:8px"><b>فعلي دخل:</b> ${fmtMoney(i.budget?.actual_revenues||0)}</div>
+            <div class="small" style="margin-top:8px"><b>فعلي صرف:</b> ${fmtMoney(exp)}</div>
+            <div class="hr"></div>
+            <div class="small">* متابعة فقط (ليس محاسبة).</div>
+          </div>
+          <div class="card">
+            <h3>تنبيه التجاوز (تجريبي)</h3>
+            <div class="badge ${cls}">نسبة الصرف للتقديري: ${pct}%</div>
+            <div class="hr"></div>
+            <div class="small">في النظام الحقيقي: Notification + Event عند تجاوز حد.</div>
+          </div>
+        </div>
+      `;
+    } else if(tabId==="milestones"){
+      const ms = i.milestones||[];
+      body.innerHTML = `
+        <div class="card">
+          <h3>المعالم</h3>
+          <table class="table">
+            <thead><tr><th>العنوان</th><th>المرحلة</th><th>تاريخ</th><th>الحالة</th></tr></thead>
+            <tbody>
+              ${ms.map(m=>`
+                <tr>
+                  <td>${m.title}</td>
+                  <td><span class="badge">${safe(m.phase)}</span></td>
+                  <td style="font-family:var(--mono)">${safe(m.target_date)}</td>
+                  <td>${m.status==="completed" ? '<span class="badge ok">مكتمل</span>' : '<span class="badge">لم يبدأ</span>'}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+      `;
+    } else if(tabId==="indicators"){
+      const inds = i.indicators||[];
+      body.innerHTML = `
+        <div class="card">
+          <h3>المؤشرات</h3>
+          <table class="table">
+            <thead><tr><th>المؤشر</th><th>النوع</th><th>التكرار</th><th>المصدر</th></tr></thead>
+            <tbody>
+              ${inds.map(ind=>`
+                <tr>
+                  <td>${ind.name}</td>
+                  <td><span class="badge">${safe(ind.type)}</span></td>
+                  <td>${safe(ind.measurement_frequency)}</td>
+                  <td>${safe(ind.data_source)}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+      `;
+    } else if(tabId==="risks"){
+      const rs = i.risks||[];
+      const staff = SSOT.staff || {};
+      const badge = (p,imp)=>{
+        const score = (p==="high"?3:p==="medium"?2:1) + (imp==="high"?3:imp==="medium"?2:1);
+        const cls = score>=5 ? "bad" : (score>=4 ? "warn" : "ok");
+        return `<span class="badge ${cls}">${safe(p)}/${safe(imp)}</span>`;
+      };
+      body.innerHTML = `
+        <div class="card">
+          <h3>سجل المخاطر</h3>
+          <table class="table">
+            <thead><tr><th>الخطر</th><th>احتمالية/أثر</th><th>المالك</th><th>المعالجة</th></tr></thead>
+            <tbody>
+              ${rs.map(r=>`
+                <tr>
+                  <td>${r.title}<div class="small">${safe(r.status)}</div></td>
+                  <td>${badge(r.probability, r.impact)}</td>
+                  <td>${safe(staff[r.owner]?.name || r.owner)}</td>
+                  <td class="small">${safe(r.mitigation)}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+      `;
+    } else if(tabId==="checklist"){
+      const cl = i.checklist||[];
+      body.innerHTML = `
+        <div class="card">
+          <h3>Checklist</h3>
+          <table class="table">
+            <thead><tr><th>العنصر</th><th>الحالة</th><th>آخر تحديث</th></tr></thead>
+            <tbody>
+              ${cl.map(c=>`
+                <tr>
+                  <td>${c.title}</td>
+                  <td>${c.status==="done" ? '<span class="badge ok">منجز</span>' : '<span class="badge">غير منجز</span>'}</td>
+                  <td style="font-family:var(--mono)">${safe(c.updated_at)}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+      `;
+    } else if(tabId==="people"){
+      const staff = SSOT.staff || {};
+      const s = staff[i.responsible_staff_id];
+      body.innerHTML = `
+        <div class="grid cols-2">
+          <div class="card">
+            <h3>المسؤول عن المبادرة</h3>
+            <div style="font-weight:900">${safe(s?.name || i.responsible_staff_id)}</div>
+            <div class="small" style="margin-top:6px">${safe(s?.role_name)} • ${safe(s?.email)}</div>
+            <div class="hr"></div>
+            <div class="small">Scope: <span style="font-family:var(--mono)">${safe(JSON.stringify(s?.scope||""))}</span></div>
+          </div>
+          <div class="card">
+            <h3>العمليات المرتبطة (Events)</h3>
+            <div class="small">في التطبيق الحقيقي: أي تعديل/صرف/مصروف/مهمة تسجّل في جدول events + audit_logs.</div>
+            <pre class="code">events: (event_type, entity_type, entity_id, payload, actor_id, created_at)</pre>
+          </div>
+        </div>
+      `;
+    } else if(tabId==="raw"){
+      const raw = JSON.stringify(i, null, 2);
+      body.innerHTML = `
+        <div class="card">
+          <h3>JSON (مختصر)</h3>
+          <pre class="code">${escapeHtml(raw.slice(0, 14000))}</pre>
+        </div>
+      `;
+    }
+    document.getElementById('mFoot').textContent = `المعرف: ${id} • آخر تحديث: ${safe(i.updated_at)} • معاينة أوفلاين`;
+  };
+
+  renderTab("summary");
+
+  tabsEl.querySelectorAll('.tab').forEach(t=>{
+    t.addEventListener('click', ()=>{
+      tabsEl.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+      renderTab(t.dataset.tab);
+    });
+  });
+
+  document.getElementById('modalBackdrop').style.display = 'flex';
+}
+
+function closeModal(){ document.getElementById('modalBackdrop').style.display = 'none'; }
+document.getElementById('mClose').addEventListener('click', closeModal);
+document.getElementById('modalBackdrop').addEventListener('click', (e)=>{ if(e.target.id==='modalBackdrop') closeModal(); });
+
+function toast(msg){
+  const el = document.createElement('div');
+  el.textContent = msg;
+  el.style.position='fixed';
+  el.style.bottom='18px';
+  el.style.left='18px';
+  el.style.background='rgba(15,23,42,.95)';
+  el.style.border='1px solid rgba(33,48,79,.85)';
+  el.style.padding='10px 12px';
+  el.style.borderRadius='12px';
+  el.style.boxShadow='var(--shadow)';
+  el.style.zIndex=99;
+  document.body.appendChild(el);
+  setTimeout(()=>{ el.remove(); }, 2200);
+}
+
+function openSSOT(){
+  const snippet = {
+    system_info: SSOT.system_info,
+    identity: SSOT.identity,
+    policies: SSOT.policies,
+    rbac: SSOT.rbac,
+    initiatives_count: Object.keys(SSOT.initiatives||{}).length
+  };
+  const w = window.open("", "_blank");
+  w.document.write("<pre style='white-space:pre-wrap; font-family:ui-monospace,monospace; direction:rtl; padding:16px; background:#0b1220; color:#e6edf7'>"+
+    escapeHtml(JSON.stringify(snippet, null, 2))+"</pre>");
+}
+
+function escapeHtml(s){ return String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+document.getElementById('q').addEventListener('keydown', (e)=>{
+  if(e.key==='Enter'){
+    const v = e.target.value.trim();
+    location.hash = v ? ('#/initiatives?q=' + encodeURIComponent(v)) : '#/initiatives';
+  }
+});
+
+window.addEventListener('hashchange', route);
+initHeader();
+route();
+</script>
+</body>
+</html>
