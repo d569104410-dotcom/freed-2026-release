@@ -1,0 +1,70 @@
+/* FREED 2026 — Navy Glass Theme (v1) */
+:root{
+  /* Base */
+  --bg-0:#0b1220;
+  --bg-1:#0f172a;
+  --bg-2:#111c33;
+  --surface: rgba(17, 28, 51, .55);
+  --surface-2: rgba(15, 23, 42, .55);
+  --border: rgba(148, 163, 184, .18);
+  --border-strong: rgba(148, 163, 184, .28);
+
+  /* Text */
+  --text-0:#e5e7eb;
+  --text-1:#cbd5e1;
+  --text-2:#94a3b8;
+
+  /* Accents */
+  --blue-500:#3b82f6;
+  --blue-600:#2563eb;
+  --green-500:#10b981;
+  --amber-500:#f59e0b;
+  --red-500:#ef4444;
+
+  /* Effects */
+  --radius-12:12px;
+  --radius-16:16px;
+  --blur-16:16px;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --glow-blue: 0 0 0 1px rgba(59,130,246,.35), 0 0 28px rgba(59,130,246,.15);
+}
+
+/* Global */
+html,body{height:100%;}
+body{
+  margin:0;
+  color:var(--text-0);
+  background:
+    radial-gradient(1200px 600px at 80% 10%, rgba(59,130,246,.18), transparent 55%),
+    radial-gradient(900px 500px at 20% 20%, rgba(16,185,129,.10), transparent 55%),
+    linear-gradient(180deg, var(--bg-0), var(--bg-1) 45%, var(--bg-0));
+  font-family:"Tajawal",system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+  direction: rtl;
+}
+
+/* Helpers */
+.freed-card{
+  background: var(--surface);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(var(--blur-16));
+  -webkit-backdrop-filter: blur(var(--blur-16));
+  border-radius: var(--radius-16);
+  box-shadow: var(--shadow);
+}
+
+.freed-btn{
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.04);
+  color: var(--text-0);
+  border-radius: 12px;
+  padding: 10px 14px;
+  cursor:pointer;
+  transition: .18s ease;
+}
+.freed-btn:hover{
+  box-shadow: var(--glow-blue);
+  border-color: rgba(59,130,246,.45);
+}
+
+a{ color: var(--blue-500); text-decoration:none; }
+a:hover{ color: var(--blue-600); }
