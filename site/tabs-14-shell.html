@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Freed 2026 — 14 Tabs Shell (Navy Glass v1)</title>
+  <style>
+    .app{ max-width: 1600px; margin:0 auto; }
+    .page{ display:none; }
+    .page.active{ display:block; }
+    .grid{ display:grid; grid-template-columns: repeat(12, 1fr); gap: var(--s-4); }
+    .col-12{ grid-column: span 12; } .col-8{ grid-column: span 8; } .col-6{ grid-column: span 6; } .col-4{ grid-column: span 4; }
+    @media (max-width:1100px){ .col-8,.col-6,.col-4{ grid-column: span 12; } }
+  </style>
+<link rel="stylesheet" href="freed.identity.bundle.css">
+</head>
+<body>
+<div class="app freed-shell">
+  <div class="freed-topbar freed-led">
+    <div class="title">
+      <strong>Freed 2026 — تطبيق الهوية على 14 تبويب</strong>
+      <span>Shell جاهز • اربط البيانات لاحقًا • نفس أسلوب Drawer + Cards</span>
+    </div>
+    <div class="freed-actions no-print">
+      <button class="freed-btn secondary small" onclick="window.location.href='./ui-kit.html'">UI Kit</button>
+      <button class="freed-btn secondary small" onclick="window.print()">طباعة A4</button>
+    </div>
+  </div>
+
+  <aside class="freed-card freed-sidebar">
+    <nav class="freed-nav" id="tabsNav">
+      <a class="active" href="#" data-page="p-dashboard">لوحة الأداء</a>
+      <a href="#" data-page="p-initiatives">المبادرات</a>
+      <a href="#" data-page="p-finance">المالية</a>
+      <a href="#" data-page="p-reports">التقارير</a>
+      <a href="#" data-page="p-settings">الإعدادات</a>
+      <hr/>
+      <a href="#" data-page="p-strategy">الربط الاستراتيجي</a>
+      <a href="#" data-page="p-timeline">الجدول الزمني</a>
+      <a href="#" data-page="p-staff">الموظفين</a>
+      <a href="#" data-page="p-donors">المانحة</a>
+      <a href="#" data-page="p-collectors">المستقطعين</a>
+      <a href="#" data-page="p-volunteers">المتطوعين</a>
+      <a href="#" data-page="p-activity">سجل الأنشطة</a>
+      <a href="#" data-page="p-data">بيانية</a>
+      <a href="#" data-page="p-misc">متنوعة</a>
+    </nav>
+  </aside>
+
+  <main style="display:flex; flex-direction:column; gap: var(--s-6);">
+
+    <!-- 1) Dashboard -->
+    <section id="p-dashboard" class="page active">
+      <div class="freed-card freed-led elevated">
+        <div class="hd"><div><h3>لوحة الأداء</h3><p>KPIs + Alerts + Charts</p></div><span class="freed-badge info"><span class="dot"></span>Dashboard</span></div>
+        <div class="bd" style="display:flex; flex-direction:column; gap: var(--s-4);">
+          <div class="freed-kpis">
+            <div class="freed-card freed-led freed-kpi"><div><div class="num">٨٢%</div><div class="lbl">إنجاز</div><div class="trend">شهري</div></div><div class="freed-icon">📌</div></div>
+            <div class="freed-card freed-led freed-kpi"><div><div class="num">١٤</div><div class="lbl">مبادرات</div><div class="trend">نشطة</div></div><div class="freed-icon">🚀</div></div>
+            <div class="freed-card freed-led freed-kpi"><div><div class="num">٩</div><div class="lbl">تنبيهات</div><div class="trend">مراجعة</div></div><div class="freed-icon">⚠️</div></div>
+            <div class="freed-card freed-led freed-kpi"><div><div class="num">٢.٤م</div><div class="lbl">ميزانية</div><div class="trend">مرصودة</div></div><div class="freed-icon">💰</div></div>
+          </div>
+          <div class="grid" style="margin-top: var(--s-2);">
+            <div class="freed-card col-4"><div class="hd"><div><h3>تنبيهات</h3><p>حرِجة/وقائية</p></div></div><div class="bd" style="display:flex; flex-direction:column; gap: var(--s-3);">
+              <div class="freed-alert warning"><div>⚠️</div><div><strong>فجوة تقييم</strong><p>أكمل قياس الأثر.</p></div></div>
+              <div class="freed-alert info"><div>ℹ️</div><div><strong>معلومة</strong><p>تصدير التقرير جاهز.</p></div></div>
+            </div></div>
+            <div class="freed-card col-8"><div class="hd"><div><h3>رسوم</h3><p>Placeholder</p></div></div><div class="bd"><div class="freed-chart">Charts Placeholder</div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2) Initiatives -->
+    <section id="p-initiatives" class="page">
+      <div class="freed-card freed-led elevated">
+        <div class="hd"><div><h3>المبادرات</h3><p>Cards + Table</p></div><span class="freed-badge"><span class="dot"></span>Initiatives</span></div>
+        <div class="bd" style="display:flex; flex-direction:column; gap: var(--s-4);">
+          <div class="grid" >
+            <div class="freed-card freed-led col-4"><div class="hd"><div><h3>مبادرة A</h3><p>ملخص</p></div><span class="freed-badge success"><span class="dot"></span>نشطة</span></div><div class="bd"><div class="freed-chart">Progress</div></div></div>
+            <div class="freed-card freed-led col-4"><div class="hd"><div><h3>مبادرة B</h3><p>ملخص</p></div><span class="freed-badge warning"><span class="dot"></span>متأخرة</span></div><div class="bd"><div class="freed-chart">KPI</div></div></div>
+            <div class="freed-card freed-led col-4"><div class="hd"><div><h3>مبادرة C</h3><p>ملخص</p></div><span class="freed-badge info"><span class="dot"></span>تخطيط</span></div><div class="bd"><div class="freed-chart">Docs</div></div></div>
+          </div>
+          <table class="freed-table freed-density-compact">
+            <thead><tr><th scope="col">المبادرة</th><th scope="col">المالك</th><th scope="col">التقدم</th><th scope="col">الحالة</th><th scope="col">إجراء</th></tr></thead>
+            <tbody>
+              <tr><td>مبادرة A</td><td>قسم</td><td class="mono">82%</td><td><span class="freed-badge success"><span class="dot"></span>مستقرة</span></td><td><button class="freed-btn secondary small">فتح</button></td></tr>
+              <tr><td>مبادرة B</td><td>قسم</td><td class="mono">41%</td><td><span class="freed-badge warning"><span class="dot"></span>فجوة</span></td><td><button class="freed-btn secondary small">فتح</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3) Finance -->
+    <section id="p-finance" class="page">
+      <div class="freed-card freed-led elevated">
+        <div class="hd"><div><h3>المالية</h3><p>Summary + Ledger</p></div><span class="freed-badge info"><span class="dot"></span>Finance</span></div>
+        <div class="bd" style="display:flex; flex-direction:column; gap: var(--s-4);">
+          <div class="grid">
+            <div class="freed-card freed-led col-4" style="padding: var(--s-5);"><div class="mini">إيرادات</div><div style="font-size: var(--fs-3xl); font-weight: var(--w-800);">3,200,000</div><div class="freed-badge success" style="margin-top: var(--s-3);"><span class="dot"></span>مستقر</div></div>
+            <div class="freed-card freed-led col-4" style="padding: var(--s-5);"><div class="mini">مصروفات</div><div style="font-size: var(--fs-3xl); font-weight: var(--w-800);">1,850,000</div><div class="freed-badge warning" style="margin-top: var(--s-3);"><span class="dot"></span>مراجعة</div></div>
+            <div class="freed-card freed-led col-4" style="padding: var(--s-5);"><div class="mini">صافي</div><div style="font-size: var(--fs-3xl); font-weight: var(--w-800);">1,350,000</div><div class="freed-badge info" style="margin-top: var(--s-3);"><span class="dot"></span>جاهز</div></div>
+          </div>
+          <table class="freed-table freed-density-compact">
+            <thead><tr><th scope="col">التاريخ</th><th scope="col">الوصف</th><th scope="col">النوع</th><th scope="col">المبلغ</th><th scope="col">الحالة</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">2026‑02‑10</td><td>إيراد</td><td>إيراد</td><td class="mono">120,000</td><td><span class="freed-badge success"><span class="dot"></span>مُرحّل</span></td></tr>
+              <tr><td class="mono">2026‑02‑12</td><td>صرف</td><td>مصروف</td><td class="mono">35,000</td><td><span class="freed-badge info"><span class="dot"></span>مُعتمد</span></td></tr>
+              <tr><td class="mono">2026‑02‑13</td><td>قيد</td><td>مصروف</td><td class="mono">8,500</td><td><span class="freed-badge warning"><span class="dot"></span>معلّق</span></td></tr>
+            </tbody>
+          </table>
+          <div class="no-print" style="display:flex; gap: var(--s-3); flex-wrap:wrap;">
+            <button class="freed-btn primary">تصدير PDF</button>
+            <button class="freed-btn secondary" onclick="window.print()">طباعة A4</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Remaining tabs placeholders -->
+    <section id="p-reports" class="page"><div class="freed-card"><div class="hd"><div><h3>التقارير</h3><p>Placeholder</p></div></div><div class="bd"><div class="freed-chart">Reports UI Placeholder</div></div></div></section>
+    <section id="p-settings" class="page"><div class="freed-card"><div class="hd"><div><h3>الإعدادات</h3><p>Wizard steps Placeholder</p></div></div><div class="bd"><div class="freed-alert info"><div>ℹ️</div><div><strong>تسلسل الإدخال</strong><p>اسم الجهة → الترخيص → سنة الخطة → الرؤية → الرسالة…</p></div></div></div></div></section>
+    <section id="p-strategy" class="page"><div class="freed-card"><div class="hd"><div><h3>الربط الاستراتيجي</h3><p>Placeholder</p></div></div><div class="bd"><div class="freed-chart">Strategy Map Placeholder</div></div></div></section>
+    <section id="p-timeline" class="page"><div class="freed-card"><div class="hd"><div><h3>الجدول الزمني</h3><p>Placeholder</p></div></div><div class="bd"><div class="freed-chart">Timeline Placeholder</div></div></div></section>
+    <section id="p-staff" class="page"><div class="freed-card"><div class="hd"><div><h3>الموظفين</h3><p>Placeholder</p></div></div><div class="bd"><div class="freed-chart">Staff Grid Placeholder</div></div></div></section>
+    <section id="p-donors" class="page"><div class="freed-card"><div class="hd"><div><h3>المانحة</h3><p>Placeholder</p></div></div><div class="bd"><div class="freed-chart">Donors Placeholder</div></div></div></section>
+    <section id="p-collectors" class="page"><div class="freed-card"><div class="hd"><div><h3>المستقطعين</h3><p>Placeholder</p></div></div><div class="bd"><div class="freed-chart">Collectors Placeholder</div></div></div></section>
+    <section id="p-volunteers" class="page"><div class="freed-card"><div class="hd"><div><h3>المتطوعين</h3><p>Placeholder</p></div></div><div class="bd"><div class="freed-chart">Volunteers Placeholder</div></div></div></section>
+    <section id="p-activity" class="page"><div class="freed-card"><div class="hd"><div><h3>سجل الأنشطة</h3><p>Placeholder</p></div></div><div class="bd"><div class="freed-chart">Activity Log Placeholder</div></div></div></section>
+    <section id="p-data" class="page"><div class="freed-card"><div class="hd"><div><h3>بيانية</h3><p>Placeholder</p></div></div><div class="bd"><div class="freed-chart">Data/Charts Placeholder</div></div></div></section>
+    <section id="p-misc" class="page"><div class="freed-card"><div class="hd"><div><h3>متنوعة</h3><p>Placeholder</p></div></div><div class="bd"><div class="freed-chart">Misc Placeholder</div></div></div></section>
+
+  </main>
+</div>
+
+<script>
+  const nav = document.getElementById('tabsNav');
+  const pages = [...document.querySelectorAll('.page')];
+  nav.querySelectorAll('a[data-page]').forEach(a=>{
+    a.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const target = a.getAttribute('data-page');
+      nav.querySelectorAll('a[data-page]').forEach(x=>x.classList.remove('active'));
+      a.classList.add('active');
+      pages.forEach(p=>p.classList.toggle('active', p.id === target));
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  });
+</script>
+</body>
+</html>

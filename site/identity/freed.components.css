@@ -1,0 +1,100 @@
+/* Freed 2026 — Components
+   Cards • Buttons • Badges • Progress
+*/
+.f-card{
+  border-radius: var(--r-2xl);
+  background: rgba(30,41,59,.64);
+  border: 1px solid rgba(148,163,184,.18);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  overflow: hidden;
+}
+.f-card-header{
+  padding: 14px 16px;
+  background: linear-gradient(180deg,
+    rgba(16,47,134,.20),
+    rgba(30,41,59,.00)
+  );
+  border-bottom: 1px solid rgba(148,163,184,.12);
+}
+.f-card-body{ padding: 14px 16px; }
+.f-card-footer{
+  padding: 12px 16px;
+  border-top: 1px solid rgba(148,163,184,.12);
+  background: rgba(15,23,42,.18);
+}
+
+.f-title{ font-weight: 800; color: var(--ink-100); font-size: var(--fs-lg); }
+.f-sub{ color: var(--ink-400); font-size: var(--fs-sm); }
+
+.f-kpi-box{
+  background: rgba(36,52,77,.54); /* tuned to match screenshot boxes */
+  border: 1px solid rgba(148,163,184,.12);
+  border-radius: var(--r-xl);
+  padding: 10px 12px;
+  min-width: 120px;
+}
+.f-kpi-label{ color: var(--ink-400); font-size: var(--fs-sm); }
+.f-kpi-val{ color: var(--ink-100); font-weight: 800; font-size: var(--fs-md); }
+.f-kpi-val.success{ color: var(--success-500); }
+
+.f-badge{
+  display:inline-flex; align-items:center; gap:6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  border: 1px solid rgba(148,163,184,.16);
+  color: var(--ink-200);
+  background: rgba(30,41,59,.55);
+}
+.f-badge-active{ background: var(--state-active-bg); color: var(--success-500); border-color: rgba(0,188,125,.25); }
+.f-badge-warning{ background: var(--state-warning-bg); color: var(--warning-500); border-color: rgba(254,154,0,.28); }
+.f-badge-danger{  background: var(--state-danger-bg);  color: var(--danger-500);  border-color: rgba(251,44,54,.28); }
+
+.f-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  height: 34px; width: 34px;
+  border-radius: 10px;
+  border: 1px solid rgba(148,163,184,.16);
+  background: rgba(30,41,59,.55);
+  color: var(--ink-200);
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease, background-color .12s ease, border-color .12s ease;
+}
+.f-btn:hover{ transform: translateY(-1px); border-color: rgba(148,163,184,.24); box-shadow: 0 14px 36px rgba(0,0,0,.35); }
+.f-btn:active{ transform: translateY(0px); }
+
+.f-btn-primary{
+  background: rgba(43,99,255,.18);
+  border-color: rgba(43,99,255,.35);
+  color: var(--primary-400);
+}
+.f-btn-whatsapp{
+  background: rgba(0,188,125,.22);
+  border-color: rgba(0,188,125,.35);
+  color: var(--success-500);
+}
+
+.f-stars{ color: #fbbf24; letter-spacing: 1px; font-size: 12px; }
+
+.f-progress{
+  display:flex; gap:4px;
+}
+.f-seg{
+  height: 20px;
+  border-radius: 6px;
+  flex: 1 1 0;
+  background: rgba(148,163,184,.12);
+  border: 1px solid rgba(148,163,184,.08);
+}
+.f-seg.on{ background: rgba(0,188,125,.95); border-color: rgba(0,188,125,.25); }
+.f-seg.warn{ background: rgba(254,154,0,.98); border-color: rgba(254,154,0,.25); }
+
+.f-meta{
+  display:flex; align-items:center; justify-content:space-between;
+  margin-top: 10px;
+  color: var(--ink-400);
+  font-size: var(--fs-sm);
+}

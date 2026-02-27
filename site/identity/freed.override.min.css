@@ -1,0 +1,8 @@
+/* Freed 2026 Navy Glass v1 — Minimal Override Pack
+   Use ONLY if internal CSS conflicts. Keep !important minimal. */
+:root{
+  --font-family: "Tajawal", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+html,body{ font-family: var(--font-family) !important; }
+body{ direction: rtl; text-align: right; background: var(--bg-0, #0F172A) !important; color: var(--t1, rgba(255,255,255,.92)) !important; }
+a{ color: var(--primary, #2560E3); }

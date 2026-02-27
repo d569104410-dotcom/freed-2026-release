@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme="freed-2026-navy-glass-v1">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Freed 2026 — Self‑Test</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="freed.identity.bundle.css">
+</head>
+<body class="freed-bg">
+  <div class="demo-wrap freed-shell">
+    <aside class="freed-card freed-sidebar">
+      <div class="freed-sidebar__brand">
+        <div class="freed-logo">F</div>
+        <div>
+          <div class="freed-title">Freed 2026</div>
+          <div class="freed-muted">Self‑Test</div>
+        </div>
+      </div>
+      <nav class="freed-nav">
+        <a class="freed-nav__item" href="index.html">الرئيسية</a>
+        <a class="freed-nav__item" href="preview.html">preview</a>
+        <a class="freed-nav__item" href="ui-kit.html">ui-kit</a>
+        <a class="freed-nav__item" href="tabs-14-shell.html">tabs-14</a>
+      </nav>
+    </aside>
+
+    <main class="freed-content">
+      <header class="freed-topbar">
+        <div>
+          <h1 class="freed-h1">فحص ذاتي — Pages Ready</h1>
+          <p class="freed-subtitle">المطلوب: لا 404 + تحميل CSS bundle + ظهور الهوية.</p>
+        </div>
+        <div class="freed-actions no-print">
+          <a class="freed-btn secondary" href="README_DEPLOY.md">README</a>
+        </div>
+      </header>
+
+      <section class="freed-grid">
+        <article class="freed-card freed-led">
+          <h2 class="freed-h2">روابط مباشرة</h2>
+          <ul class="freed-list">
+            <li><a class="freed-link" href="freed.identity.bundle.css">CSS Bundle</a></li>
+            <li><a class="freed-link" href="preview.html">preview.html</a></li>
+            <li><a class="freed-link" href="ui-kit.html">ui-kit.html</a></li>
+            <li><a class="freed-link" href="tabs-14-shell.html">tabs-14-shell.html</a></li>
+          </ul>
+        </article>
+
+        <article class="freed-card">
+          <h2 class="freed-h2">نتيجة الفحص</h2>
+          <div id="result" class="freed-badge warning">RUNNING…</div>
+          <p class="freed-muted" style="margin-top:10px">التحقق يتم عبر قراءة computed style لعنصر Card. إن لم تُحمّل الهوية سيظهر FAIL.</p>
+          <div class="freed-card freed-led" id="probe" style="margin-top:12px">
+            <div class="freed-muted">Probe Card — يجب أن تكون زجاجية Navy مع حدود خفيفة.</div>
+          </div>
+        </article>
+      </section>
+
+      <section class="freed-card" style="margin-top:16px">
+        <h2 class="freed-h2">معيار PASS</h2>
+        <ul class="freed-list">
+          <li>فتح <code>CSS Bundle</code> يُظهر ملف CSS (ليس 404).</li>
+          <li>العنصر Probe يظهر كـ Card زجاجية (Navy Glass).</li>
+          <li>Network لا يحتوي 404 لملفات CSS/Assets.</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+<script>
+(function(){
+  const el = document.getElementById('probe');
+  const res = document.getElementById('result');
+  const cs = window.getComputedStyle(el);
+  const bg = cs.backgroundColor || '';
+  const border = cs.borderTopColor || '';
+  // PASS إذا الخلفية ليست شفافة تمامًا (ليس rgba(0,0,0,0)) ولها border لون غير فارغ
+  const pass = bg.indexOf('rgba(0, 0, 0, 0)') === -1 && border && border !== 'rgba(0, 0, 0, 0)';
+  res.className = 'freed-badge ' + (pass ? 'success' : 'error');
+  res.textContent = pass ? 'PASS — CSS Loaded' : 'FAIL — CSS Not Loaded / Wrong Path';
+})();
+</script>
+</body>
+</html>

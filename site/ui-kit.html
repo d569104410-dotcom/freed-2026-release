@@ -1,0 +1,884 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Freed 2026 Navy Glass v1 — UI Kit</title>
+  <style>
+    /* UI Kit helpers only (not part of theme) */
+    .demo-wrap{ max-width: 1600px; margin: 0 auto; }
+    .grid-2{ display:grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); }
+    .grid-3{ display:grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-4); }
+    .grid-4{ display:grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-4); }
+    @media (max-width: 1100px){ .grid-4{ grid-template-columns: repeat(2,1fr);} .grid-3{ grid-template-columns: repeat(2,1fr);} .grid-2{ grid-template-columns: 1fr; } }
+    @media (max-width: 640px){ .grid-4,.grid-3{ grid-template-columns: 1fr; } }
+    .section{ margin-top: var(--s-8); }
+    .section .sec-title{ display:flex; align-items:center; justify-content:space-between; gap: var(--s-4); margin-bottom: var(--s-4); }
+    .section .sec-title h2{ margin:0; font-size: var(--fs-2xl); font-weight: var(--w-800); }
+    .kbd{ font-size: var(--fs-xs); padding: 4px 8px; border-radius: var(--r-pill); border:1px solid var(--stroke-soft); background: rgba(255,255,255,0.06); color: var(--t-2); }
+    .code{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; color: rgba(255,255,255,.85); background: rgba(0,0,0,.25); padding: 10px 12px; border:1px solid var(--stroke-soft); border-radius: var(--r-md); overflow:auto; }
+    .pill-link{ display:inline-flex; align-items:center; gap:8px; padding: 8px 12px; border-radius: var(--r-pill); border:1px solid var(--stroke-soft); background: rgba(16,22,30,.35); color: var(--t-2); }
+    .pill-link:hover{ background: rgba(255,255,255,.05); }
+    .mini{ font-size: var(--fs-xs); color: var(--t-3); }
+  </style>
+<link rel="stylesheet" href="freed.identity.bundle.css">
+</head>
+<body>
+  <div class="demo-wrap freed-shell">
+
+    <!-- Topbar -->
+    <div class="freed-topbar freed-led">
+      <div class="title">
+        <strong>Freed 2026 — UI Kit</strong>
+        <span>Freed 2026 Navy Glass v1 • RTL • Tajawal • Tokens‑Driven</span>
+      </div>
+      <div class="freed-actions no-print">
+        <button class="freed-btn secondary small" id="btnDensity">تبديل كثافة الجداول</button>
+        <button class="freed-btn secondary small" id="btnOpenModal">فتح Modal</button>
+        <a class="freed-btn primary small" href="#examples">أمثلة الصفحات</a>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="freed-card freed-sidebar">
+      <div style="padding: var(--s-3) var(--s-3) var(--s-4);">
+        <div class="freed-field">
+          <label class="freed-label">بحث سريع</label>
+          <input class="freed-input" placeholder="ابحث عن مكوّن أو صفحة..." id="q"/>
+          <div class="freed-help">جرّب: Buttons / Tables / Modal / Dashboard</div>
+        </div>
+      </div>
+      <nav class="freed-nav" id="nav">
+        <a class="active" href="#tokens">التوكنز <span class="count">v1</span></a>
+        <a href="#buttons">الأزرار</a>
+        <a href="#inputs">الحقول</a>
+        <a href="#cards">البطاقات</a>
+        <a href="#badges">الشارات</a>
+        <a href="#alerts">التنبيهات</a>
+        <a href="#tabs">التبويبات</a>
+        <a href="#tables">الجداول</a>
+        <a href="#modals">النوافذ (Modal)</a>
+        <a href="#layout">قالب الصفحة (Shell)</a>
+        <a href="#examples">أمثلة 3 صفحات</a>
+        <hr/>
+        <div class="mini">محاكاة تبويبات Freed (14)</div>
+        <a href="#t-dashboard">لوحة الأداء</a>
+        <a href="#t-initiatives">المبادرات</a>
+        <a href="#t-finance">المالية</a>
+        <a href="#t-reports">التقارير</a>
+        <a href="#t-settings">الإعدادات</a>
+        <a href="#t-strategy">الربط الاستراتيجي</a>
+        <a href="#t-timeline">الجدول الزمني</a>
+        <a href="#t-staff">الموظفين</a>
+        <a href="#t-donors">المانحة</a>
+        <a href="#t-collectors">المستقطعين</a>
+        <a href="#t-volunteers">المتطوعين</a>
+        <a href="#t-activity">سجل الأنشطة</a>
+        <a href="#t-data">بيانية</a>
+        <a href="#t-misc">متنوعة</a>
+      </nav>
+    </aside>
+
+    <!-- Main -->
+    <main style="display:flex; flex-direction:column; gap: var(--s-6);">
+
+      <!-- TOKENS -->
+      <section id="tokens" class="section">
+        <div class="sec-title">
+          <h2>Design Tokens</h2>
+          <span class="kbd">theme.css / tokens.json</span>
+        </div>
+
+        <div class="grid-2">
+          <div class="freed-card">
+            <div class="hd">
+              <div>
+                <h3>لوحة ألوان (مختصر)</h3>
+                <p>BG/Surface/Primary/Status — ثابتة</p>
+              </div>
+              <span class="freed-badge info"><span class="dot"></span>مرجعية</span>
+            </div>
+            <div class="bd grid-4">
+              <div class="freed-card" style="padding:14px; background: var(--bg-0); border-color: var(--stroke-soft);"><div class="mini">BG‑0</div><div class="code">#0F172A</div></div>
+              <div class="freed-card" style="padding:14px; background: var(--surface-1);"><div class="mini">Surface‑1</div><div class="code">rgba(30,41,60,0.82)</div></div>
+              <div class="freed-card" style="padding:14px; background: var(--primary-soft); border-color: rgba(38,106,237,.35);"><div class="mini">Primary</div><div class="code">#266AED</div></div>
+              <div class="freed-card" style="padding:14px; background: var(--success-soft); border-color: rgba(4,161,111,.35);"><div class="mini">Success</div><div class="code">#04A16F</div></div>
+              <div class="freed-card" style="padding:14px; background: var(--warning-soft); border-color: rgba(240,77,36,.35);"><div class="mini">Warning</div><div class="code">#F04D24</div></div>
+              <div class="freed-card" style="padding:14px; background: var(--error-soft); border-color: rgba(239,68,68,.35);"><div class="mini">Error</div><div class="code">#EF4444</div></div>
+              <div class="freed-card" style="padding:14px; background: var(--info-soft); border-color: rgba(45,102,228,.35);"><div class="mini">Info</div><div class="code">#2D66E4</div></div>
+              <div class="freed-card" style="padding:14px; background: var(--accent-purple-soft); border-color: rgba(162,53,254,.35);"><div class="mini">Accent</div><div class="code">#A235FE</div></div>
+            </div>
+          </div>
+
+          <div class="freed-card">
+            <div class="hd">
+              <div>
+                <h3>خطوط ومسافات</h3>
+                <p>8px grid + Tajawal weights</p>
+              </div>
+              <span class="freed-badge"><span class="dot"></span>نظام</span>
+            </div>
+            <div class="bd">
+              <div class="grid-2">
+                <div>
+                  <div style="font-size: var(--fs-3xl); font-weight: var(--w-800);">عنوان رئيسي</div>
+                  <div style="font-size: var(--fs-2xl); font-weight: var(--w-700); margin-top: 8px;">عنوان قسم</div>
+                  <div style="font-size: var(--fs-lg); font-weight: var(--w-700); margin-top: 8px;">عنوان مكوّن</div>
+                  <div style="font-size: var(--fs-md); font-weight: var(--w-500); margin-top: 8px; color: var(--t-2);">
+                    هذا نص توضيحي عربي لاختبار القراءة والتباين والمحاذاة في RTL.
+                  </div>
+                </div>
+                <div class="code">
+                  <div>--fs-md: 14px</div>
+                  <div>--fs-lg: 16px</div>
+                  <div>--fs-2xl: 22px</div>
+                  <div>--fs-3xl: 28px</div>
+                  <div>--r-lg: 18px</div>
+                  <div>--blur-md: 14px</div>
+                  <div>--shadow-1: 0 10px 30px rgba(0,0,0,.35)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BUTTONS -->
+      <section id="buttons" class="section">
+        <div class="sec-title">
+          <h2>Buttons</h2>
+          <a class="pill-link" href="#layout">اذهب لقالب الصفحة</a>
+        </div>
+
+        <div class="freed-card">
+          <div class="hd">
+            <div>
+              <h3>Variants + Sizes + States</h3>
+              <p>Primary / Secondary / Ghost / Danger</p>
+            </div>
+            <span class="freed-badge info"><span class="dot"></span>freed-btn</span>
+          </div>
+          <div class="bd" style="display:flex; flex-direction:column; gap: var(--s-4);">
+            <div style="display:flex; gap: var(--s-3); flex-wrap:wrap;">
+              <button class="freed-btn primary">زر أساسي</button>
+              <button class="freed-btn secondary">زر ثانوي</button>
+              <button class="freed-btn ghost">زر شفاف</button>
+              <button class="freed-btn danger">حذف/خطر</button>
+              <button class="freed-btn secondary" disabled>معطّل</button>
+            </div>
+            <div style="display:flex; gap: var(--s-3); flex-wrap:wrap;">
+              <button class="freed-btn primary small">Small</button>
+              <button class="freed-btn primary">Default</button>
+              <button class="freed-btn primary large">Large</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- INPUTS -->
+      <section id="inputs" class="section">
+        <div class="sec-title">
+          <h2>Inputs</h2>
+          <span class="kbd">Label + Input + Help/Error</span>
+        </div>
+
+        <div class="grid-2">
+          <div class="freed-card">
+            <div class="hd">
+              <div>
+                <h3>حقول نموذج</h3>
+                <p>Input / Select / Textarea + Validation</p>
+              </div>
+              <span class="freed-badge"><span class="dot"></span>freed-field</span>
+            </div>
+            <div class="bd" style="display:flex; flex-direction:column; gap: var(--s-4);">
+              <div class="freed-field">
+                <label class="freed-label">اسم المبادرة</label>
+                <input class="freed-input" placeholder="مثال: مبادرة جسور"/>
+                <div class="freed-help">وصف مختصر يساعد المستخدم على الإدخال الصحيح.</div>
+              </div>
+              <div class="freed-field">
+                <label class="freed-label">الحالة</label>
+                <select class="freed-select">
+                  <option>نشطة</option>
+                  <option>مؤجلة</option>
+                  <option>مكتملة</option>
+                </select>
+              </div>
+              <div class="freed-field">
+                <label class="freed-label">ملاحظة</label>
+                <textarea class="freed-textarea" rows="4" placeholder="اكتب ملاحظة..."></textarea>
+              </div>
+              <div class="freed-field">
+                <label class="freed-label">حقل مع خطأ</label>
+                <input class="freed-input" aria-invalid="true" value="قيمة غير صحيحة"/>
+                <div class="freed-error">هذه القيمة غير متوافقة مع القواعد.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="freed-card">
+            <div class="hd">
+              <div>
+                <h3>بحث/فلترة</h3>
+                <p>مثال سريع على شريط فلاتر</p>
+              </div>
+              <span class="freed-badge info"><span class="dot"></span>Pattern</span>
+            </div>
+            <div class="bd grid-2">
+              <div class="freed-field">
+                <label class="freed-label">بحث</label>
+                <input class="freed-input" placeholder="اسم/رقم/جهة..."/>
+              </div>
+              <div class="freed-field">
+                <label class="freed-label">تصنيف</label>
+                <select class="freed-select">
+                  <option>الكل</option>
+                  <option>عالية الأولوية</option>
+                  <option>متوسطة</option>
+                  <option>منخفضة</option>
+                </select>
+              </div>
+              <div style="grid-column: 1 / -1; display:flex; gap: var(--s-3); flex-wrap:wrap;">
+                <button class="freed-btn primary">تطبيق</button>
+                <button class="freed-btn secondary">إعادة ضبط</button>
+                <button class="freed-btn ghost">تصدير</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CARDS -->
+      <section id="cards" class="section">
+        <div class="sec-title">
+          <h2>Cards</h2>
+          <span class="kbd">Glass + LED Hover</span>
+        </div>
+
+        <div class="freed-kpis">
+          <div class="freed-card freed-led freed-kpi">
+            <div>
+              <div class="num">٨٢%</div>
+              <div class="lbl">نسبة الإنجاز</div>
+              <div class="trend">+3.1% هذا الشهر</div>
+            </div>
+            <div class="freed-icon">📌</div>
+          </div>
+          <div class="freed-card freed-led freed-kpi">
+            <div>
+              <div class="num">١٤</div>
+              <div class="lbl">مبادرات نشطة</div>
+              <div class="trend">٣ تحتاج تدخل</div>
+            </div>
+            <div class="freed-icon">🚀</div>
+          </div>
+          <div class="freed-card freed-led freed-kpi">
+            <div>
+              <div class="num">٢.٤م</div>
+              <div class="lbl">ميزانية مرصودة</div>
+              <div class="trend">صرف: ٥٨%</div>
+            </div>
+            <div class="freed-icon">💰</div>
+          </div>
+          <div class="freed-card freed-led freed-kpi">
+            <div>
+              <div class="num">٩</div>
+              <div class="lbl">تنبيهات</div>
+              <div class="trend">٢ Critical</div>
+            </div>
+            <div class="freed-icon">⚠️</div>
+          </div>
+        </div>
+
+        <div class="grid-3" style="margin-top: var(--s-4);">
+          <div class="freed-card freed-led">
+            <div class="hd">
+              <div>
+                <h3>بطاقة مبادرة</h3>
+                <p>ملخص سريع + حالات واضحة</p>
+              </div>
+              <span class="freed-badge success"><span class="dot"></span>مكتملة</span>
+            </div>
+            <div class="bd">
+              <div style="display:flex; gap: var(--s-2); flex-wrap:wrap; margin-bottom: var(--s-3);">
+                <span class="freed-badge info"><span class="dot"></span>محور: العلاقات</span>
+                <span class="freed-badge"><span class="dot"></span>مالك: التوجيه</span>
+                <span class="freed-badge"><span class="dot"></span>RBAC</span>
+              </div>
+              <div class="freed-chart">Chart Placeholder</div>
+              <div style="display:flex; gap: var(--s-3); margin-top: var(--s-4);">
+                <button class="freed-btn primary small" onclick="openModal()">فتح التفاصيل</button>
+                <button class="freed-btn secondary small">إجراءات</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="freed-card freed-led">
+            <div class="hd">
+              <div>
+                <h3>بطاقة مالية</h3>
+                <p>قيد + ملاحظة تدقيق</p>
+              </div>
+              <span class="freed-badge warning"><span class="dot"></span>مراجعة</span>
+            </div>
+            <div class="bd">
+              <table class="freed-table freed-density-compact">
+                <thead>
+                  <tr>
+                    <th scope="col">البند</th>
+                    <th scope="col">المبلغ</th>
+                    <th scope="col">الحالة</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>مصروفات تشغيلية</td>
+                    <td class="mono">350,000</td>
+                    <td><span class="freed-badge info"><span class="dot"></span>مُعتمد</span></td>
+                  </tr>
+                  <tr>
+                    <td>عهدة</td>
+                    <td class="mono">25,000</td>
+                    <td><span class="freed-badge warning"><span class="dot"></span>معلّق</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="freed-card freed-led">
+            <div class="hd">
+              <div>
+                <h3>بطاقة تنبيه</h3>
+                <p>تمييز المعلومات الحرجة</p>
+              </div>
+              <span class="freed-badge error"><span class="dot"></span>Critical</span>
+            </div>
+            <div class="bd" style="display:flex; flex-direction:column; gap: var(--s-3);">
+              <div class="freed-alert error">
+                <div>⛔</div>
+                <div>
+                  <strong>تجاوز حد الصرف</strong>
+                  <p>تم رصد صرف يتجاوز الحد المسموح — راجع قيود المبادرة.</p>
+                </div>
+              </div>
+              <div class="freed-alert info">
+                <div>ℹ️</div>
+                <div>
+                  <strong>تذكير</strong>
+                  <p>حدّث مؤشرات الأثر قبل نهاية الأسبوع.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BADGES -->
+      <section id="badges" class="section">
+        <div class="sec-title">
+          <h2>Badges</h2>
+          <span class="kbd">Status fixed</span>
+        </div>
+        <div class="freed-card">
+          <div class="bd" style="padding-top: var(--s-5); display:flex; gap: var(--s-3); flex-wrap:wrap;">
+            <span class="freed-badge success"><span class="dot"></span>نجاح</span>
+            <span class="freed-badge warning"><span class="dot"></span>تحذير</span>
+            <span class="freed-badge error"><span class="dot"></span>خطأ</span>
+            <span class="freed-badge info"><span class="dot"></span>معلومة</span>
+            <span class="freed-badge"><span class="dot"></span>محايد</span>
+          </div>
+          <div class="bd"><div class="mini">قاعدة: لا تستخدم اللون وحده — استخدم Dot + نص.</div></div>
+        </div>
+      </section>
+
+      <!-- ALERTS -->
+      <section id="alerts" class="section">
+        <div class="sec-title">
+          <h2>Alerts</h2>
+          <span class="kbd">Critical info</span>
+        </div>
+
+        <div class="grid-2">
+          <div class="freed-alert success">
+            <div>✅</div>
+            <div>
+              <strong>تم الحفظ بنجاح</strong>
+              <p>تم تحديث بيانات المبادرة وتسجيل الإجراء في سجل الأنشطة.</p>
+            </div>
+          </div>
+          <div class="freed-alert warning">
+            <div>⚠️</div>
+            <div>
+              <strong>يحتاج مراجعة</strong>
+              <p>يوجد نقص في قياس الأثر — أكمل حقول التقييم.</p>
+            </div>
+          </div>
+          <div class="freed-alert error">
+            <div>⛔</div>
+            <div>
+              <strong>فشل الإجراء</strong>
+              <p>تعذر تنفيذ العملية — تحقق من الصلاحيات أو المدخلات.</p>
+            </div>
+          </div>
+          <div class="freed-alert info">
+            <div>ℹ️</div>
+            <div>
+              <strong>معلومة</strong>
+              <p>يمكنك تصدير التقرير بصيغة PDF من مركز الطباعة.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TABS -->
+      <section id="tabs" class="section">
+        <div class="sec-title">
+          <h2>Tabs</h2>
+          <span class="kbd">Pills</span>
+        </div>
+
+        <div class="freed-card">
+          <div class="bd" style="padding-top: var(--s-5);">
+            <div class="freed-tabs" role="tablist" aria-label="Tabs demo">
+              <button class="freed-tab" role="tab" aria-selected="true" data-tab="tab1">نظرة عامة</button>
+              <button class="freed-tab" role="tab" aria-selected="false" data-tab="tab2">المؤشرات</button>
+              <button class="freed-tab" role="tab" aria-selected="false" data-tab="tab3">المهام</button>
+              <button class="freed-tab" role="tab" aria-selected="false" data-tab="tab4">الملفات</button>
+            </div>
+
+            <div id="tab1" class="freed-card" style="margin-top: var(--s-4); padding: var(--s-5); background: rgba(16,22,30,.35);">
+              <strong>نظرة عامة</strong>
+              <div class="freed-muted" style="margin-top: 6px;">محتوى تجريبي للتبديل بين التبويبات.</div>
+            </div>
+            <div id="tab2" class="freed-card" style="display:none; margin-top: var(--s-4); padding: var(--s-5); background: rgba(16,22,30,.35);">
+              <strong>المؤشرات</strong>
+              <div class="freed-muted" style="margin-top: 6px;">ضع KPIs أو Charts هنا.</div>
+            </div>
+            <div id="tab3" class="freed-card" style="display:none; margin-top: var(--s-4); padding: var(--s-5); background: rgba(16,22,30,.35);">
+              <strong>المهام</strong>
+              <div class="freed-muted" style="margin-top: 6px;">قائمة مهام مرتبطة بالمبادرة.</div>
+            </div>
+            <div id="tab4" class="freed-card" style="display:none; margin-top: var(--s-4); padding: var(--s-5); background: rgba(16,22,30,.35);">
+              <strong>الملفات</strong>
+              <div class="freed-muted" style="margin-top: 6px;">مرفقات/شواهد/تصديرات.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TABLES -->
+      <section id="tables" class="section">
+        <div class="sec-title">
+          <h2>Tables</h2>
+          <span class="kbd">Density toggle</span>
+        </div>
+
+        <div class="freed-card">
+          <div class="hd">
+            <div>
+              <h3>جدول مبادرات (مثال)</h3>
+              <p>قابل للتوسّع مع الحفاظ على “صمت بصري”</p>
+            </div>
+            <span class="freed-badge"><span class="dot"></span>freed-table</span>
+          </div>
+          <div class="bd">
+            <table class="freed-table freed-density-compact" id="tbl">
+              <thead>
+                <tr>
+                  <th scope="col">المبادرة</th>
+                  <th scope="col">المحور</th>
+                  <th scope="col">التقدم</th>
+                  <th scope="col">الحالة</th>
+                  <th scope="col">إجراء</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>تعزيز مشاركة الأسرة</td>
+                  <td>العلاقات</td>
+                  <td><span class="mono">82%</span></td>
+                  <td><span class="freed-badge success"><span class="dot"></span>مكتملة</span></td>
+                  <td><button class="freed-btn secondary small">عرض</button></td>
+                </tr>
+                <tr>
+                  <td>قياس أثر منهجي</td>
+                  <td>الحوكمة</td>
+                  <td><span class="mono">41%</span></td>
+                  <td><span class="freed-badge warning"><span class="dot"></span>يحتاج تدخل</span></td>
+                  <td><button class="freed-btn secondary small">عرض</button></td>
+                </tr>
+                <tr>
+                  <td>إغلاق فجوات التقييم</td>
+                  <td>الأثر</td>
+                  <td><span class="mono">12%</span></td>
+                  <td><span class="freed-badge error"><span class="dot"></span>خطر</span></td>
+                  <td><button class="freed-btn secondary small">عرض</button></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="mini" style="margin-top: var(--s-3);">لتقليل كثافة الجداول: استخدم compact للعرض اليومي وcomfort للتقارير.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MODALS -->
+      <section id="modals" class="section">
+        <div class="sec-title">
+          <h2>Modals</h2>
+          <span class="kbd">ESC closes</span>
+        </div>
+
+        <div class="freed-card">
+          <div class="bd" style="padding-top: var(--s-5); display:flex; gap: var(--s-3); flex-wrap:wrap;">
+            <button class="freed-btn primary" onclick="openModal()">فتح Modal</button>
+            <button class="freed-btn secondary" onclick="openDrawer()">فتح Drawer</button>
+          </div>
+          <div class="bd"><div class="mini">*تم تضمين مثال Drawer داخل نفس Modal كـPattern سريع.*</div></div>
+        </div>
+      </section>
+
+      <!-- LAYOUT -->
+      <section id="layout" class="section">
+        <div class="sec-title">
+          <h2>Layout Shell Template</h2>
+          <span class="kbd">Topbar + Sidebar + Content + Modal</span>
+        </div>
+
+        <div class="freed-card">
+          <div class="hd">
+            <div>
+              <h3>قالب صفحة جاهز للمطورين</h3>
+              <p>انسخ هذا الهيكل وابدأ مباشرة</p>
+            </div>
+            <span class="freed-badge info"><span class="dot"></span>Template</span>
+          </div>
+          <div class="bd">
+            <div class="code">
+&lt;div class="freed-shell"&gt;
+  &lt;div class="freed-topbar freed-led"&gt;...&lt;/div&gt;
+  &lt;aside class="freed-card freed-sidebar"&gt;...&lt;/aside&gt;
+  &lt;main&gt;...&lt;/main&gt;
+&lt;/div&gt;
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXAMPLES -->
+      <section id="examples" class="section">
+        <div class="sec-title">
+          <h2>أمثلة 3 صفحات (تحكيم)</h2>
+          <span class="kbd">Dashboard / Initiatives / Finance</span>
+        </div>
+
+        <!-- Dashboard -->
+        <div id="t-dashboard" class="freed-card freed-led elevated">
+          <div class="hd">
+            <div>
+              <h3>Dashboard — لوحة الأداء</h3>
+              <p>قراءة 5 ثوانٍ: KPIs + Alerts + Charts + Actions</p>
+            </div>
+            <span class="freed-badge info"><span class="dot"></span>Example</span>
+          </div>
+          <div class="bd" style="display:flex; flex-direction:column; gap: var(--s-4);">
+            <div class="freed-kpis">
+              <div class="freed-card freed-led freed-kpi"><div><div class="num">٩٣</div><div class="lbl">استجابة</div><div class="trend">بيانات تجريبية</div></div><div class="freed-icon">🧾</div></div>
+              <div class="freed-card freed-led freed-kpi"><div><div class="num">٩٨.٩%</div><div class="lbl">تكليف منسق/ة</div><div class="trend">حوكمة مرتفعة</div></div><div class="freed-icon">🛡️</div></div>
+              <div class="freed-card freed-led freed-kpi"><div><div class="num">٢٤.٧%</div><div class="lbl">فجوة قياس أثر</div><div class="trend">يحتاج تدخل</div></div><div class="freed-icon">📉</div></div>
+              <div class="freed-card freed-led freed-kpi"><div><div class="num">+ قوي</div><div class="lbl">مشاركة الأسرة</div><div class="trend">أثر اجتماعي</div></div><div class="freed-icon">👨‍👩‍👧‍👦</div></div>
+            </div>
+            <div class="grid-3">
+              <div class="freed-card"><div class="hd"><div><h3>تنبيهات</h3><p>تمييز الحرِج</p></div></div><div class="bd" style="display:flex; flex-direction:column; gap: var(--s-3);"><div class="freed-alert warning"><div>⚠️</div><div><strong>فجوة تقييم</strong><p>لم تُفعّل أدوات قياس أثر منهجي.</p></div></div><div class="freed-alert info"><div>ℹ️</div><div><strong>اقتراح</strong><p>فعّل لوحة مؤشرات القياس والاستدامة.</p></div></div></div></div>
+              <div class="freed-card"><div class="hd"><div><h3>اتجاهات</h3><p>Placeholder</p></div></div><div class="bd"><div class="freed-chart">Chart Placeholder</div></div></div>
+              <div class="freed-card"><div class="hd"><div><h3>إجراءات سريعة</h3><p>أزرار واضحة</p></div></div><div class="bd" style="display:flex; flex-direction:column; gap: var(--s-3);"><button class="freed-btn primary">إضافة مبادرة</button><button class="freed-btn secondary">تصدير تقرير</button><button class="freed-btn ghost">فتح مركز الطباعة</button></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Initiatives -->
+        <div id="t-initiatives" class="freed-card freed-led elevated" style="margin-top: var(--s-6);">
+          <div class="hd">
+            <div>
+              <h3>Initiatives — المبادرات</h3>
+              <p>Cards + Tabs + Table density + Modal details</p>
+            </div>
+            <span class="freed-badge"><span class="dot"></span>Example</span>
+          </div>
+          <div class="bd">
+            <div class="grid-3">
+              <div class="freed-card freed-led">
+                <div class="hd"><div><h3>مبادرة: جسور</h3><p>محور العلاقات • هدف: مشاركة الأسرة</p></div><span class="freed-badge success"><span class="dot"></span>نشطة</span></div>
+                <div class="bd">
+                  <div style="display:flex; gap: var(--s-2); flex-wrap:wrap; margin-bottom: var(--s-3);">
+                    <span class="freed-badge info"><span class="dot"></span>KPI</span>
+                    <span class="freed-badge warning"><span class="dot"></span>قياس أثر</span>
+                  </div>
+                  <div class="freed-chart">Timeline/Progress Placeholder</div>
+                  <div style="display:flex; gap: var(--s-3); margin-top: var(--s-4);">
+                    <button class="freed-btn primary small" onclick="openModal()">تفاصيل</button>
+                    <button class="freed-btn secondary small">تعديل</button>
+                  </div>
+                </div>
+              </div>
+              <div class="freed-card freed-led">
+                <div class="hd"><div><h3>مبادرة: قياس الأثر</h3><p>إغلاق فجوة التقييم والتطوير</p></div><span class="freed-badge warning"><span class="dot"></span>متأخرة</span></div>
+                <div class="bd"><div class="freed-chart">KPI Placeholder</div></div>
+              </div>
+              <div class="freed-card freed-led">
+                <div class="hd"><div><h3>مبادرة: الاستدامة</h3><p>حوكمة + تحسين مستمر</p></div><span class="freed-badge info"><span class="dot"></span>قيد التخطيط</span></div>
+                <div class="bd"><div class="freed-chart">Docs Placeholder</div></div>
+              </div>
+            </div>
+
+            <hr/>
+            <table class="freed-table freed-density-compact">
+              <thead>
+                <tr>
+                  <th scope="col">المبادرة</th>
+                  <th scope="col">المالك</th>
+                  <th scope="col">المرحلة</th>
+                  <th scope="col">الحالة</th>
+                  <th scope="col">إجراء</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>جسور</td>
+                  <td>التوجيه</td>
+                  <td>تنفيذ</td>
+                  <td><span class="freed-badge success"><span class="dot"></span>مستقرة</span></td>
+                  <td><button class="freed-btn secondary small" onclick="openModal()">فتح</button></td>
+                </tr>
+                <tr>
+                  <td>قياس الأثر</td>
+                  <td>الجودة</td>
+                  <td>تقييم</td>
+                  <td><span class="freed-badge warning"><span class="dot"></span>فجوة</span></td>
+                  <td><button class="freed-btn secondary small">فتح</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Finance -->
+        <div id="t-finance" class="freed-card freed-led elevated" style="margin-top: var(--s-6);">
+          <div class="hd">
+            <div>
+              <h3>Finance — المالية</h3>
+              <p>ملخص سريع + جداول كثيفة + حالات قيود + طباعة</p>
+            </div>
+            <span class="freed-badge info"><span class="dot"></span>Example</span>
+          </div>
+          <div class="bd" style="display:flex; flex-direction:column; gap: var(--s-4);">
+            <div class="grid-3">
+              <div class="freed-card freed-led" style="padding: var(--s-5);">
+                <div class="mini">إجمالي الإيرادات</div>
+                <div style="font-size: var(--fs-3xl); font-weight: var(--w-800);">٣,٢٠٠,٠٠٠</div>
+                <div class="freed-badge success" style="margin-top: var(--s-3);"><span class="dot"></span>مستقر</div>
+              </div>
+              <div class="freed-card freed-led" style="padding: var(--s-5);">
+                <div class="mini">إجمالي المصروفات</div>
+                <div style="font-size: var(--fs-3xl); font-weight: var(--w-800);">١,٨٥٠,٠٠٠</div>
+                <div class="freed-badge warning" style="margin-top: var(--s-3);"><span class="dot"></span>مراجعة بنود</div>
+              </div>
+              <div class="freed-card freed-led" style="padding: var(--s-5);">
+                <div class="mini">صافي</div>
+                <div style="font-size: var(--fs-3xl); font-weight: var(--w-800);">١,٣٥٠,٠٠٠</div>
+                <div class="freed-badge info" style="margin-top: var(--s-3);"><span class="dot"></span>جاهز للتقرير</div>
+              </div>
+            </div>
+
+            <div class="freed-alert warning">
+              <div>⚠️</div>
+              <div>
+                <strong>تقليل كثافة الجداول</strong>
+                <p>استخدم compact للعرض اليومي وcomfort للتقارير ثم اطبع عبر Print Center.</p>
+              </div>
+            </div>
+
+            <table class="freed-table freed-density-compact">
+              <thead>
+                <tr>
+                  <th scope="col">التاريخ</th>
+                  <th scope="col">الوصف</th>
+                  <th scope="col">النوع</th>
+                  <th scope="col">المبلغ</th>
+                  <th scope="col">الحالة</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="mono">2026‑02‑10</td>
+                  <td>إيراد تبرع</td>
+                  <td>إيراد</td>
+                  <td class="mono">120,000</td>
+                  <td><span class="freed-badge success"><span class="dot"></span>مُرحّل</span></td>
+                </tr>
+                <tr>
+                  <td class="mono">2026‑02‑12</td>
+                  <td>صرف مبادرة</td>
+                  <td>مصروف</td>
+                  <td class="mono">35,000</td>
+                  <td><span class="freed-badge info"><span class="dot"></span>مُعتمد</span></td>
+                </tr>
+                <tr>
+                  <td class="mono">2026‑02‑13</td>
+                  <td>قيد مراجعة</td>
+                  <td>مصروف</td>
+                  <td class="mono">8,500</td>
+                  <td><span class="freed-badge warning"><span class="dot"></span>معلّق</span></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div style="display:flex; gap: var(--s-3); flex-wrap:wrap;" class="no-print">
+              <button class="freed-btn primary">تصدير PDF</button>
+              <button class="freed-btn secondary" onclick="window.print()">طباعة A4</button>
+              <button class="freed-btn ghost">إعدادات الطباعة</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Remaining tab anchors for sidebar -->
+        <div id="t-reports"></div>
+        <div id="t-settings"></div>
+        <div id="t-strategy"></div>
+        <div id="t-timeline"></div>
+        <div id="t-staff"></div>
+        <div id="t-donors"></div>
+        <div id="t-collectors"></div>
+        <div id="t-volunteers"></div>
+        <div id="t-activity"></div>
+        <div id="t-data"></div>
+        <div id="t-misc"></div>
+
+      </section>
+
+      <div class="freed-card" style="padding: var(--s-5);">
+        <strong>ملاحظة تطبيق الهوية على النظام (14 تبويب)</strong>
+        <div class="freed-muted" style="margin-top: 6px;">
+          هذا الملف يثبت أن المكوّنات تعمل بالهوية. للتطبيق على النظام: اربط <span class="code" style="display:inline;">theme.css</span> بسطر واحد ثم طبّق الكلاسات
+          على صفحات: لوحة الأداء → المبادرات → المالية → التقارير → الإعدادات… إلخ.
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Modal Overlay -->
+  <div class="freed-overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Freed modal">
+    <div class="freed-modal">
+      <div class="mhd">
+        <div>
+          <h2>تفاصيل (Modal)</h2>
+          <p>مثال سريع على نافذة تفاصيل — Header sticky + Tabs</p>
+        </div>
+        <div style="display:flex; gap: var(--s-2);">
+          <button class="freed-btn secondary small" onclick="closeModal()">إغلاق</button>
+        </div>
+      </div>
+      <div class="mbd">
+        <div class="freed-tabs" role="tablist" aria-label="Modal tabs">
+          <button class="freed-tab" role="tab" aria-selected="true" data-mtab="m1">ملخص</button>
+          <button class="freed-tab" role="tab" aria-selected="false" data-mtab="m2">مؤشرات</button>
+          <button class="freed-tab" role="tab" aria-selected="false" data-mtab="m3">إجراءات</button>
+        </div>
+
+        <div id="m1" style="margin-top: var(--s-4);">
+          <div class="freed-alert info">
+            <div>ℹ️</div>
+            <div>
+              <strong>قاعدة</strong>
+              <p>المودال يجب أن يبقى داخل 86vh ولا يكسر RTL.</p>
+            </div>
+          </div>
+        </div>
+        <div id="m2" style="display:none; margin-top: var(--s-4);">
+          <div class="freed-chart">Chart Placeholder</div>
+        </div>
+        <div id="m3" style="display:none; margin-top: var(--s-4); display:flex; gap: var(--s-3); flex-wrap:wrap;">
+          <button class="freed-btn primary">حفظ</button>
+          <button class="freed-btn secondary">إرسال</button>
+          <button class="freed-btn danger">حذف</button>
+        </div>
+
+        <hr/>
+        <div class="freed-card" style="padding: var(--s-5); background: rgba(16,22,30,.35);">
+          <strong>Drawer Pattern (داخل Modal)</strong>
+          <div class="freed-muted" style="margin-top: 6px;">يمكنك تحويل هذا القسم لDrawer جانبي في النظام عند الحاجة.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const overlay = document.getElementById('overlay');
+
+  function openModal(){ overlay.classList.add('open'); }
+  function closeModal(){ overlay.classList.remove('open'); }
+  function openDrawer(){ openModal(); }
+
+  // topbar buttons
+  document.getElementById('btnOpenModal')?.addEventListener('click', openModal);
+
+  // ESC to close
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
+
+  // Tabs (page)
+  document.querySelectorAll('.freed-tab[data-tab]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const id = btn.getAttribute('data-tab');
+      document.querySelectorAll('.freed-tab[data-tab]').forEach(b=>b.setAttribute('aria-selected','false'));
+      btn.setAttribute('aria-selected','true');
+      ['tab1','tab2','tab3','tab4'].forEach(t=>{
+        const el = document.getElementById(t);
+        if(!el) return;
+        el.style.display = (t===id) ? 'block' : 'none';
+      });
+    });
+  });
+
+  // Tabs (modal)
+  document.querySelectorAll('.freed-tab[data-mtab]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const id = btn.getAttribute('data-mtab');
+      document.querySelectorAll('.freed-tab[data-mtab]').forEach(b=>b.setAttribute('aria-selected','false'));
+      btn.setAttribute('aria-selected','true');
+      ['m1','m2','m3'].forEach(t=>{
+        const el = document.getElementById(t);
+        if(!el) return;
+        el.style.display = (t===id) ? 'block' : 'none';
+      });
+    });
+  });
+
+  // Density toggle
+  const tbl = document.getElementById('tbl');
+  let compact = true;
+  document.getElementById('btnDensity')?.addEventListener('click', ()=>{
+    compact = !compact;
+    if(!tbl) return;
+    tbl.classList.toggle('freed-density-compact', compact);
+    tbl.classList.toggle('freed-density-comfort', !compact);
+  });
+
+  // Search filter for sidebar nav
+  const q = document.getElementById('q');
+  const nav = document.getElementById('nav');
+  q?.addEventListener('input', ()=>{
+    const v = (q.value||'').trim().toLowerCase();
+    nav.querySelectorAll('a').forEach(a=>{
+      const t = a.textContent.trim().toLowerCase();
+      a.style.display = (!v || t.includes(v)) ? '' : 'none';
+    });
+  });
+
+  // click outside modal to close
+  overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeModal(); });
+</script>
+</body>
+</html>
